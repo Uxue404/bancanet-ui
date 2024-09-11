@@ -4,3 +4,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+input{
+  @apply p-2 border rounded-xl text-gray-500 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400
+}
+
+button{
+  @apply w-full rounded-3xl p-4 bg-purple-500 text-white
+}
+
+.error{
+  @apply text-red-500 text-xs ml-2
+}

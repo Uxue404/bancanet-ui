@@ -1,1 +1,47 @@
-<p>login works!</p>
+<div class="w-full h-full p-4">
+  <div class="w-full h-full flex flex-col gap-6">
+    <div class="text-3xl">
+      <p>Ingresar a  <span class="font-bold">Banca en Línea</span></p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label class="ml-2">Usuario</label>
+        <input [formControl]="ctrlEmailUser" class="input" placeholder="Usuario">
+        <div *ngIf="ctrlEmailUser.touched && ctrlEmailUser.invalid"
+             class="error">
+          <label *ngIf="ctrlEmailUser.hasError('required')">
+            Valor Requerido
+          </label>
+          <label *ngIf="ctrlEmailUser.hasError('email')">
+            Correo no valido
+          </label>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <label class="ml-2">Contraseña</label>
+        <input [formControl]="ctrlPasswordUser"
+               type="password"
+               class="input"
+               placeholder="Contraseña">
+        <div *ngIf="ctrlPasswordUser.touched && ctrlPasswordUser.invalid"
+             class="error">
+          <label *ngIf="ctrlPasswordUser.hasError('required')">
+            Valor Requerido
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="text-right text-xs">
+      <p>¿Olvidaste tu contraseña? <span>Recuperala</span></p>
+    </div>
+    <div class="flex flex-col gap-4 px-10">
+      <button>ENTRAR A LA BANCA</button>
+      <button>INGRESAR CON FACE ID</button>
+    </div>
+
+    <div class="flex flex-col items-center text-xs">
+      <p>¿No tienes cuenta con nosotros?</p>
+      <span>Unete a nosotros</span>
+    </div>
+  </div>
+</div>
