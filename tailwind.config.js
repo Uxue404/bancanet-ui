@@ -11,12 +11,17 @@ module.exports = {
         accent: "#E6E9ED",    // Azul muy claro
         warning: "#F38675",        // Coral
         neutral: "#F3C6B9",        // Rosa claro
-        fondo: "#F7F7F7",   // Blanco cremoso
+        fondo: "#F3F3F3",   // Blanco cremoso
         texto: "#30343D",   // Gris azulado oscuro
+        icon: "#59775A",
+        "men-icon": "#C4C5C8",
+        subText: "#6E7177"
       },
     },
 
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
 
