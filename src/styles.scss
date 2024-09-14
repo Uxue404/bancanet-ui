@@ -18,3 +18,7 @@ button{
 .error{
   @apply text-warning text-xs ml-2
 }
+
+.fondo-gradiente{
+  @apply bg-gradient-to-r from-emerald-500 to-emerald-900
+}

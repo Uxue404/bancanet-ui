@@ -1,27 +1,23 @@
-<div class="h-screen max-w-2xl bg-fondo pb-20 mx-auto">
+<div class="h-screen w-auto sm:max-w-lg  bg-fondo pb-20 mx-auto">
   <div class="flex flex-col w-full px-2 pt-10 gap-4  scrollbar-hide">
+    <!--    Cantidad Cuenta-->
     <div class="flex flex-col items-center p-2 w-full ">
       <p class="text-4xl">
         $ 800,000.00
       </p>
       <span class="text-subText">Saldo Actual</span>
     </div>
-    <div class="w-full  justify-center flex bg-secondary rounded-2xl p-3">
-      <!-- Tailwind CSS Playground : https://play.tailwindcss.com/ATVteKFRxw -->
-
-      <div class="bg-gradient-to-r from-emerald-500 to-emerald-900 w-[23rem] h-[13rem] rounded-2xl p-6 text-white shadow-xl grid grid-cols-1 grid-rows-2">
-        <!-- PIN -->
+    <!--CARDS-->
+    <div class="w-full  justify-center flex bg-white rounded-2xl p-3 drop-shadow-lg">
+      <!--      CREDIT CARD-->
+      <div class="fondo-gradiente w-[23rem] h-[13rem] rounded-2xl p-6 text-white shadow-xl grid grid-cols-1 grid-rows-2">
         <div class="flex items-end">
           <div class=" w-11 h-7 rounded bg-yellow-100">&nbsp;</div>
         </div>
-
-
         <div class="flex items-end justify-around ">
-
-          <div class="number whitespace-nowrap text-lg font-semibold" style="font-family:Courier new, mono;">
+          <span class="number whitespace-nowrap text-lg font-semibold" style="font-family:Courier new, mono;">
             4242&nbsp;4242&nbsp;4242&nbsp;4242
-          </div>
-          <!-- Visa logo -->
+          </span>
           <div class="logo text-white w-16 h-8 flex items-center">
             <svg viewBox="0 0 1000 324.68">
               <path
@@ -33,10 +29,19 @@
       </div>
 
 
+
+    </div>
+
+    <div class="w-full bg-white p-3 flex justify-between items-center rounded-2xl drop-shadow-lg">
+      <span class="ms-3 text-sm font-medium">Activar Tarjeta Digital</span>
+      <label class="inline-flex items-center cursor-pointer">
+        <input type="checkbox" value="" class="sr-only peer" checked>
+        <div class="relative w-11 h-6 bg-gray-200 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r from-emerald-500 to-emerald-900"></div>
+
+      </label>
+
     </div>
   </div>
-
-
 
   <app-navbar class="fixed bottom-0 w-full m-auto"></app-navbar>
 </div>
