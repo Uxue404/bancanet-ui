@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  @apply text-secondary text-lg font-bold leading-tight bg-fondo
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 input{
-  @apply p-2 border rounded-xl text-gray-500 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400
+  @apply p-2 border rounded-xl text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm
 }
 
 button{
-  @apply w-full rounded-3xl p-4 bg-purple-500 text-white
+  @apply w-full rounded-3xl p-4 bg-primary text-white drop-shadow-md font-semibold text-white
 }
 
 .error{
-  @apply text-red-500 text-xs ml-2
+  @apply text-warning text-xs ml-2
 }
