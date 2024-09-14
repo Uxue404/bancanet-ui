@@ -9,7 +9,9 @@
 
 }
 
-
+.fondo-gradiente{
+  @apply bg-gradient-to-r from-emerald-500 to-emerald-900
+}
 
 mat-icon{
   @apply text-icon text-men-icon
