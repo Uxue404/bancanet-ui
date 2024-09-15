@@ -1,0 +1,29 @@
+<div class="flex flex-col gap-4">
+  <div mat-dialog-title class="text-lg font-bold text-texto font-semibold">
+    Informacion Bancaria
+  </div>
+
+  <mat-dialog-content>
+    <div class="flex flex-col gap-2 text-xs">
+      <div>
+        <p>Número de Cuenta</p>
+        <span class="font-medium text-emerald-500">{{data.numCuenta}}</span>
+      </div>
+      <div>
+        <p>Número de Tarjeta Digital</p>
+        <span class="font-medium text-emerald-500">{{data.numTarjeta}}</span>
+      </div>
+      <div>
+        <p>Cuenta CLABE</p>
+        <span class="font-medium text-emerald-500">{{data.numCLABE}}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="false" class="">
+      Cerrar
+    </button>
+  </mat-dialog-actions>
+</div>
+
+
