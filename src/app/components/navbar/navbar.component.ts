@@ -26,11 +26,31 @@ export class NavbarComponent implements OnInit {
   mostrarDatosBancarios(){
     this.matDialog.open(DatosBancariosDialogComponent, {
       data: {
-        numCuenta: "14005777817",
-        numTarjeta: "4189 2810 4954 0116",
-        numCLABE: "072180010738307890"
+        numCuenta: this.usuario.numCuenta,
+        numTarjeta: this.usuario.numTarjeta,
+        numCLABE: this.usuario.numCLABE
       }
 
     })
   }
+
+  usuario: usuarioBancoInfo={
+    idUser: 1,
+    nombre: 'Juan',
+    apellido: 'Pérez',
+    nomUser: 'juanperez',
+    numCuenta: '1234567890',
+    numTarjeta: '1111-2222-3333-4444',
+    numCLABE: '123456789012345678'
+  }
+}
+
+type usuarioBancoInfo = {
+  idUser: number,
+  nombre: string,
+  apellido: string,
+  nomUser: string,
+  numCuenta: string,
+  numTarjeta: string,
+  numCLABE: string,
 }
