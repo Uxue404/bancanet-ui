@@ -10,7 +10,17 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  activeModal: string | null = null;
 
+  // Método para abrir el modal
+  openModal(modalId: string) {
+    this.activeModal = modalId;
+  }
+
+  // Método para cerrar el modal
+  closeModal() {
+    this.activeModal = null;
+  }
   constructor() { }
 
   ngOnInit(): void {

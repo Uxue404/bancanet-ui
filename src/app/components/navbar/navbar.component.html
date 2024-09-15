@@ -1,21 +1,56 @@
 
-  <div class="flex bg-white justify-around items-center max-w-2xl h-16 rounded-t-xl">
-    <mat-icon class="icon-size">
-      home
-    </mat-icon>
-    <mat-icon class="icon-size">
-      compare_arrows
-    </mat-icon>
-    <div class="principal fondo-gradiente flex justify-center items-center rotate-45 -mt-6 rounded-xl">
-      <mat-icon class="icon-size blanco -rotate-45">
-        grid_view
-      </mat-icon>
-    </div>
-    <mat-icon class="icon-size">
-      account_circle
-    </mat-icon>
-    <mat-icon class="icon-size">
-      question_mark
+<div class="flex bg-white justify-around items-center max-w-2xl h-16 rounded-t-xl">
+  <mat-icon (click)="openModal('retiro')"
+            class="icon-size">
+    payments
+  </mat-icon>
+  <mat-icon onclick="my_modal_1.showModal()"
+    (click)="openModal('transferencia')"
+            class="icon-size">
+    compare_arrows
+  </mat-icon>
+  <div (click)="openModal('datosCuenta')"
+       class="principal fondo-gradiente flex justify-center items-center rotate-45 -mt-6 rounded-xl"
+  >
+    <mat-icon class="icon-size blanco -rotate-45">
+      grid_view
     </mat-icon>
   </div>
+  <mat-icon (click)="openModal('datosUsuario')"
+            class="icon-size">
+    account_circle
+  </mat-icon>
+  <mat-icon (click)="openModal('dudas')"
+            class="icon-size">
+    question_mark
+  </mat-icon>
+</div>
+
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        <mat-icon>
+          close
+        </mat-icon>
+      </button>
+    </form>
+    <p class="text-lg font-bold text-texto font-semibold">Informacion Bancaria</p>
+
+    <div class="flex flex-col gap-2 text-xs">
+      <div>
+        <p>Número de Cuenta</p>
+        <span class="font-medium text-emerald-500">14005777817</span>
+      </div>
+      <div>
+        <p>Número de Tarjeta Digital</p>
+        <span class="font-medium text-emerald-500">4189 2810 4954 0116</span>
+      </div>
+      <div>
+        <p>Cuenta CLABE</p>
+        <span class="font-medium text-emerald-500">072180010738307890</span>
+      </div>
+    </div>
+  </div>
+</dialog>
 
