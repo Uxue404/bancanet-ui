@@ -1,3 +1,9 @@
 .fondo-gradiente{
   @apply bg-gradient-to-r from-emerald-500 to-emerald-900
 }
+
+.datos-secundarios{
+  font-size: 0.6rem;
+  line-height: 1rem;
+  @apply text-subText font-extralight
+}
