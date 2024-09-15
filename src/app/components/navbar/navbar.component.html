@@ -4,7 +4,7 @@
             class="icon-size">
     payments
   </mat-icon>
-  <mat-icon onclick="my_modal_1.showModal()"
+  <mat-icon
     (click)="openModal('transferencia')"
             class="icon-size">
     compare_arrows
@@ -12,7 +12,8 @@
   <div (click)="openModal('datosCuenta')"
        class="principal fondo-gradiente flex justify-center items-center rotate-45 -mt-6 rounded-xl"
   >
-    <mat-icon class="icon-size blanco -rotate-45">
+    <mat-icon onclick="my_modal_1.showModal()"
+      class="icon-size blanco -rotate-45">
       grid_view
     </mat-icon>
   </div>
@@ -36,7 +37,6 @@
       </button>
     </form>
     <p class="text-lg font-bold text-texto font-semibold">Informacion Bancaria</p>
-
     <div class="flex flex-col gap-2 text-xs">
       <div>
         <p>Número de Cuenta</p>
