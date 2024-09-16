@@ -33,15 +33,16 @@
 
     <div class="flex-col gap-3 w-full p-3 bg-white flex justify-center rounded-2xl drop-shadow-lg">
       <span class="text-left px-3 text-sm font-medium">Transacciones</span>
-      <ng-container *ngFor="let i of movimiento">
-        <div class="w-full bg-white flex p-3 justify-between shadow-inner rounded-2xl">
+      <ng-container *ngFor="let i of ejemploMovimiento">
+        <div (click)="modalMovimiento(i.idTransaccion)"
+          class="w-full bg-white flex p-3 justify-between shadow-inner rounded-2xl">
           <div class="flex flex-col gap-1">
-            <span class="font-medium text-xs">{{i.lugar}}</span>
-            <span class="datos-secundarios">{{ i.tipoCargo? 'Cargo': 'Abono' }}</span>
+            <span class="font-medium text-xs">{{i.contenido.lugar}}</span>
+            <span class="datos-secundarios">{{ i.contenido.tipoCargo? 'Cargo': 'Abono' }}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <span class=" {{i.tipoCargo? 'text-red-400': 'text-green-500'}} font-medium">{{ i.monto |currency: 'USD':'symbol' }}</span>
-            <span class="datos-secundarios">{{i.fechaHora | date:'dd/MM/yyyy'}}</span>
+            <span class=" {{i.contenido.tipoCargo? 'text-red-400': 'text-green-500'}} font-medium">{{ i.contenido.monto |currency: 'USD':'symbol' }}</span>
+            <span class="datos-secundarios">{{i.contenido.fechaHora | date:'dd/MM/yyyy'}}</span>
           </div>
         </div>
 

@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NavbarComponent} from "../../../../components/navbar/navbar.component";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {
+  DatosMovimientoDialogComponent
+} from "../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent,MatDialogModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(
+    private matDialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
 
@@ -34,40 +40,82 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  movimiento: Transaccion[] = [
+  ejemploMovimiento: Transaccion[] = [
     {
       idTransaccion: 1,
-      idUser: 1,
-      cuenta: {
-        numeroCuenta: '1234567890',
-        tarjetaDigital: '1111-2222-3333-4444',
-        CLABE: '123456789012345678',
-        creditoAceptado: 10000.00,
-        saldoDisponible: 7000.00,
-        cargos: 10000.00
-      },
-      tipoCargo: true,
-      monto: 3000.00,
-      lugar: 'Supermercado A',
-      fechaHora: new Date('2024-09-14T10:00:00')
+      contenido: {
+        idUser: 12345,
+        cuenta: {
+          numeroCuenta: '1234567890',
+          tarjetaDigital: '1111222233334444',
+          CLABE: '123456789012345678',
+          creditoAceptado: 10000.00,
+          saldoDisponible: 7000.00,
+          cargos: 3000.00
+        },
+        tipoCargo: true,
+        monto: 250.00,
+        lugar: 'Supermercado XYZ',
+        fechaHora: new Date('2024-09-15T14:30:00Z'),
+        status: 'Completada'
+      }
     },
     {
       idTransaccion: 2,
-      idUser: 1,
-      cuenta: {
-        numeroCuenta: '1234567890',
-        tarjetaDigital: '1111-2222-3333-4444',
-        CLABE: '123456789012345678',
-        creditoAceptado: 10000.00,
-        saldoDisponible: 7000.00,
-        cargos: 10000.00
-      },
-      tipoCargo: false,
-      monto: 200.00,
-      lugar: 'Depósito',
-      fechaHora: new Date('2024-09-14T15:00:00')
+      contenido: {
+        idUser: 12345,
+        cuenta: {
+          numeroCuenta: '1234567890',
+          tarjetaDigital: '1111222233334444',
+          CLABE: '123456789012345678',
+          creditoAceptado: 10000.00,
+          saldoDisponible: 6750.00, // Asegúrate de ajustar el saldo si es necesario
+          cargos: 3250.00 // Asegúrate de ajustar los cargos si es necesario
+        },
+        tipoCargo: false, // Supongamos que es un abono
+        monto: 250.00,
+        lugar: 'Depósito en Cajero Automático',
+        fechaHora: new Date('2024-09-16T09:15:00Z'),
+        status: 'Completada'
+      }
+    },
+    {
+      idTransaccion: 3,
+      contenido: {
+        idUser: 12345,
+        cuenta: {
+          numeroCuenta: '1234567890',
+          tarjetaDigital: '1111222233334444',
+          CLABE: '123456789012345678',
+          creditoAceptado: 10000.00,
+          saldoDisponible: 7000.00,
+          cargos: 3000.00
+        },
+        tipoCargo: true, // Supongamos que es un cargo
+        monto: 500.00,
+        lugar: 'Compra en Línea',
+        fechaHora: new Date('2024-09-17T11:45:00Z'),
+        status: 'Completada'
+      }
     }
   ];
+
+  modalMovimiento(id:number){
+    console.log(id);
+    const movimiento = this.ejemploMovimiento.find(t => t.idTransaccion === id);
+    const dialogData = {
+      monto: movimiento?.contenido.monto,
+      numeroCuenta: movimiento?.contenido.cuenta.numeroCuenta,
+      tipoCargo: movimiento?.contenido.tipoCargo,
+      lugar: movimiento?.contenido.lugar,
+      fechaHora: movimiento?.contenido.fechaHora.toISOString(), // Convierte a string ISO
+      status: movimiento?.contenido.status
+    }
+    this.matDialog.open(DatosMovimientoDialogComponent, {
+      data: dialogData
+    })
+
+  }
 
 }
 
@@ -90,11 +138,14 @@ type CuentaBanco = {
 
 
 type Transaccion = {
-  idTransaccion: number;       // ID de la transacción
-  idUser: number;              // ID del usuario que realizó la transacción
-  cuenta: CuentaBanco;         // Cuenta bancaria asociada a la transacción
-  tipoCargo: boolean;          // true para cargo, false para abono
-  monto: number;               // Monto de la transacción
-  lugar: string;               // Lugar donde se realizó la transacción
-  fechaHora: Date;             // Fecha y hora de la transacción
+  idTransaccion: number,
+  contenido: {
+    idUser: number,
+    cuenta: CuentaBanco,
+    tipoCargo: boolean,
+    monto: number,
+    lugar: string,
+    fechaHora: Date,
+    status:string
+  }
 };
