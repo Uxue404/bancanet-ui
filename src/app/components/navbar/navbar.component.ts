@@ -14,8 +14,6 @@ import {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  activeModal: string | null = null;
-
 
   constructor(
     private matDialog: MatDialog,
@@ -25,6 +23,7 @@ export class NavbarComponent implements OnInit {
   }
   mostrarDatosBancarios(){
     this.matDialog.open(DatosBancariosDialogComponent, {
+      width: '90%',
       data: {
         numCuenta: this.usuario.numCuenta,
         numTarjeta: this.usuario.numTarjeta,
