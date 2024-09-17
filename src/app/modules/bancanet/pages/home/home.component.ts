@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
           saldoDisponible: 7000.00,
           cargos: 3000.00
         },
-        tipoCargo: true, // Supongamos que es un cargo
+        tipoCargo: true,
         monto: 500.00,
         lugar: 'Compra en Línea',
         fechaHora: new Date('2024-09-17T11:45:00Z'),
@@ -112,6 +112,7 @@ export class HomeComponent implements OnInit {
       status: movimiento?.contenido.status
     }
     this.matDialog.open(DatosMovimientoDialogComponent, {
+      width: '90%',
       data: dialogData
     })
 
@@ -120,20 +121,20 @@ export class HomeComponent implements OnInit {
 }
 
 type UsuarioBanco= {
-  idUser: number,        // ID único del usuario
-  nombre: string,        // Nombre del usuario
-  apellido: string,      // Apellido del usuario
-  user: string,         // Username del usuario
-  cuenta: CuentaBanco   // Relación con la cuenta bancaria del usuario
+  idUser: number,
+  nombre: string,
+  apellido: string,
+  user: string,
+  cuenta: CuentaBanco
 };
 
 type CuentaBanco = {
-  numeroCuenta: string,     // Número de cuenta (PK)
-  tarjetaDigital: string,     // Número de tarjeta digital
-  CLABE: string,       // Clave Bancaria Estandarizada (CLABE)
-  creditoAceptado: number,    // Crédito aceptado para la cuenta
-  saldoDisponible: number,    // Saldo disponible en la cuenta (calculado)
-  cargos: number,    // Monto disponible (crédito + saldo disponible)
+  numeroCuenta: string,
+  tarjetaDigital: string,
+  CLABE: string,
+  creditoAceptado: number,
+  saldoDisponible: number,
+  cargos: number,
 };
 
 
