@@ -5,6 +5,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {
   DatosMovimientoDialogComponent
 } from "../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
+import {FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -17,27 +18,28 @@ import {
 export class HomeComponent implements OnInit {
 
 
+
+
   constructor(
     private matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-
-  }
-
-  usuarioLogeado: UsuarioBanco= {
-    idUser: 1,
-    nombre: 'Juan',
-    apellido: 'Pérez',
-    user: 'juanperez',
-    cuenta: {
-      numeroCuenta: '1234567890',
-      tarjetaDigital: '1111222233334444',
-      CLABE: '123456789012345678',
-      creditoAceptado: 10000.00,  // Crédito aceptado
-      saldoDisponible: 7000.00,   // Calculado (basado en transacciones)
-      cargos: 3000.00   // Inicialmente igual al crédito aceptado
-    }
+    this.usuarioLogeado = {
+      idUser: 1,
+      nombre: 'Juan',
+      apellido: 'Pérez',
+      user: 'juanperez',
+      cuenta: {
+        numeroCuenta: '1234567890',
+        tarjetaDigital: '1111222233334444',
+        CLABE: '123456789012345678',
+        creditoAceptado: 10000.00,  // Crédito aceptado
+        saldoDisponible: 7000.00,   // Calculado (basado en transacciones)
+        cargos: 3000.00   // Inicialmente igual al crédito aceptado
+      },
+      isTarjetaActiva: true
+    };
   }
 
   ejemploMovimiento: Transaccion[] = [
@@ -118,6 +120,22 @@ export class HomeComponent implements OnInit {
 
   }
 
+  usuarioLogeado: UsuarioBanco= {
+    idUser: 1,
+    nombre: 'Juan',
+    apellido: 'Pérez',
+    user: 'juanperez',
+    cuenta: {
+      numeroCuenta: '1234567890',
+      tarjetaDigital: '1111222233334444',
+      CLABE: '123456789012345678',
+      creditoAceptado: 10000.00,  // Crédito aceptado
+      saldoDisponible: 7000.00,   // Calculado (basado en transacciones)
+      cargos: 3000.00   // Inicialmente igual al crédito aceptado
+    },
+    isTarjetaActiva: true
+  }
+
 }
 
 type UsuarioBanco= {
@@ -125,7 +143,8 @@ type UsuarioBanco= {
   nombre: string,
   apellido: string,
   user: string,
-  cuenta: CuentaBanco
+  cuenta: CuentaBanco,
+  isTarjetaActiva: boolean
 };
 
 type CuentaBanco = {
@@ -150,3 +169,6 @@ type Transaccion = {
     status:string
   }
 };
+ type formType = {
+   isActiva: FormControl<boolean>
+ }

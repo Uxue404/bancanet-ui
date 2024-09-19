@@ -27,7 +27,7 @@ module.exports = {
 
   daisyui: {
     styled: true,
-    themes: ["wireframe"]
+    themes: ["light"]
   }
 }
 

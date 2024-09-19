@@ -5,6 +5,10 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {
   DatosBancariosDialogComponent
 } from "../../shared/dialogs/datos-bancarios-dialog/datos-bancarios-dialog.component";
+import {DatosUsuarioDialogComponent} from "../../shared/dialogs/datos-usuario-dialog/datos-usuario-dialog.component";
+import {
+  AtencionClientesDialogComponent
+} from "../../shared/dialogs/atencion-clientes-dialog/atencion-clientes-dialog.component";
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +25,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  mostrarAtencionClientes(){
+    this.matDialog.open(AtencionClientesDialogComponent, {
+      width: '90%',
+      data:{
+        titulo: "¿Quieres contactar a soporte?",
+        contenido:"Si quieres contactar con soporte presiona el boton verde"
+      }
+    })
+  }
+
   mostrarDatosBancarios(){
     this.matDialog.open(DatosBancariosDialogComponent, {
       width: '90%',
@@ -33,11 +48,25 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  mostrarDatosUsuario(){
+    this.matDialog.open(DatosUsuarioDialogComponent, {
+      width: '90%',
+      data: {
+        nomUsuario: `${this.usuario.nombre} ${this.usuario.apellido}`,
+        fechaNacimiento: this.usuario.fechaNacimiento,
+        correo: this.usuario.nomUser,
+        telefono: this.usuario.telefono
+      }
+    })
+  }
+
   usuario: usuarioBancoInfo={
     idUser: 1,
     nombre: 'Juan',
     apellido: 'Pérez',
     nomUser: 'juanperez',
+    fechaNacimiento: '06/11/2001',
+    telefono: '5566332244',
     numCuenta: '1234567890',
     numTarjeta: '1111-2222-3333-4444',
     numCLABE: '123456789012345678'
@@ -48,7 +77,9 @@ type usuarioBancoInfo = {
   idUser: number,
   nombre: string,
   apellido: string,
+  fechaNacimiento: string,
   nomUser: string,
+  telefono: string,
   numCuenta: string,
   numTarjeta: string,
   numCLABE: string,
