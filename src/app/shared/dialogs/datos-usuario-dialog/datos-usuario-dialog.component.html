@@ -1,0 +1,31 @@
+<div class="flex flex-col gap-4">
+  <div mat-dialog-title class="text-lg font-semibold text-texto">
+    Informacion Personal
+  </div>
+
+  <mat-dialog-content>
+    <div class="flex flex-col gap-2 text-xs">
+      <div>
+        <p class="font-medium text-sm">Nombre</p>
+        <span class="font-medium text-xs text-subText">{{data.nomUsuario}}</span>
+      </div>
+      <div>
+        <p class="font-medium text-sm ">Fecha de Nacimiento</p>
+        <span class="font-medium text-xs text-subText">{{data.fechaNacimiento}}</span>
+      </div>
+      <div>
+        <p class="font-medium text-sm ">Correo / Usuario</p>
+        <span class="font-medium text-xs text-subText">{{data.correo}}</span>
+      </div>
+      <div>
+        <p class="font-medium text-sm ">Telefono</p>
+        <span class="font-medium text-xs text-subText">{{data.telefono}}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="false" class="">
+      Cerrar
+    </button>
+  </mat-dialog-actions>
+</div>

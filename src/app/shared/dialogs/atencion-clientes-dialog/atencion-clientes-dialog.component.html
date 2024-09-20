@@ -1,0 +1,25 @@
+<div class="flex flex-col gap-4">
+  <div mat-dialog-title class="text-lg font-semibold text-texto">
+    {{data.titulo}}
+  </div>
+
+  <mat-dialog-content>
+    <div class="flex flex-col gap-2 text-xs">
+      <p class="font-medium text-xs text-subText">
+        {{data.contenido}}
+      </p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="flex gap-4">
+    <button mat-flat-button>
+      Contacta de Soporte
+    </button>
+
+    <button mat-flat-button>
+      Cerrar
+    </button>
+
+  </mat-dialog-actions>
+
+</div>
