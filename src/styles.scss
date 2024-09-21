@@ -7,13 +7,13 @@ html, body {
   @apply text-secondary text-lg font-bold leading-tight bg-fondo
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-input{
-  @apply p-2 border rounded-xl text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm
-}
+//input{
+//  @apply rounded-xl text-sm
+//}
 
-button{
-  @apply w-full rounded-3xl p-4 bg-icon text-white drop-shadow-md font-semibold
-}
+//.button{
+//  @apply  rounded-3xl p-4 text-white drop-shadow-md font-semibold
+//}
 
 .error{
   @apply text-warning text-xs ml-2

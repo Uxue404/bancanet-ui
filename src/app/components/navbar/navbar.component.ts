@@ -9,6 +9,9 @@ import {DatosUsuarioDialogComponent} from "../../shared/dialogs/datos-usuario-di
 import {
   AtencionClientesDialogComponent
 } from "../../shared/dialogs/atencion-clientes-dialog/atencion-clientes-dialog.component";
+import {
+  FormularioTransferenciaDialogComponent
+} from "../../shared/dialogs/tranferencias/formulario-transferencia-dialog/formulario-transferencia-dialog.component";
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +28,13 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  mostrarTransferencia(){
+    this.matDialog.open(FormularioTransferenciaDialogComponent, {
+      width: '90%'
+    })
+  }
+
 
   mostrarAtencionClientes(){
     this.matDialog.open(AtencionClientesDialogComponent, {
