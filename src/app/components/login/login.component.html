@@ -1,72 +1,79 @@
 <div class="max-w-2xl h-screen p-10 flex m-auto justify-center">
   <div class="w-full h-full flex flex-col gap-8 justify-center">
-    <div class="text-4xl text-pretty text-center">
-      <p>Ingresar a  <span class="font-bold">Banca en Línea</span></p>
+    <div class="text-3xl text-pretty text-center font-light">
+      <p>Ingresar a  <span class="font-bold block">Banca en Línea</span></p>
     </div>
     <div class="flex flex-col gap-6">
-      <div class="flex flex-col gap-1">
-        <label class="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            class="h-4 w-4 opacity-70">
-            <path
-              d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-            <path
-              d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-          </svg>
-          <input [formControl]="ctrlEmailUser"
-                 type="email" class="grow" placeholder="Email" />
-        </label>
-        <div *ngIf="ctrlEmailUser.touched && ctrlEmailUser.invalid"
-             class="error">
-          <label *ngIf="ctrlEmailUser.hasError('required')"
-                 class="label-text-alt text-warning">
-            Valor Requerido
+      <form [formGroup]="form" (ngSubmit)="login()" class="flex flex-col gap-6">
+        <div class="flex flex-col gap-1">
+          <label class="input input-bordered flex items-center gap-2">
+            <mat-icon class="opacity-70">
+              account_circle
+            </mat-icon>
+            <!--          <svg-->
+            <!--            xmlns="http://www.w3.org/2000/svg"-->
+            <!--            viewBox="0 0 16 16"-->
+            <!--            fill="currentColor"-->
+            <!--            class="h-4 w-4 opacity-70">-->
+            <!--            <path-->
+            <!--              d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />-->
+            <!--            <path-->
+            <!--              d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />-->
+            <!--          </svg>-->
+            <input [formControl]="ctrluserName"
+                   type="text" class="grow" placeholder="User Name" />
           </label>
-          <label *ngIf="ctrlEmailUser.hasError('email')"
-                 class="label-text-alt text-warning" >
-            Correo no valido
+          <div *ngIf="ctrluserName.touched && ctrluserName.invalid"
+               class="error">
+            <label *ngIf="ctrluserName.hasError('required')"
+                   class="label-text-alt text-warning">
+              Valor Requerido
+            </label>
+            <!--          <label *ngIf="ctrlEmailUser.hasError('email')"-->
+            <!--                 class="label-text-alt text-warning" >-->
+            <!--            Correo no valido-->
+            <!--          </label>-->
+          </div>
+
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="h-4 w-4 opacity-70">
+              <path
+                fill-rule="evenodd"
+                d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                clip-rule="evenodd" />
+            </svg>
+            <input [formControl]="ctrlPasswordUser"
+                   type="password" class="grow" value="password" placeholder="Contraseña" />
           </label>
+          <div *ngIf="ctrlPasswordUser.touched && ctrlPasswordUser.invalid"
+               class="error">
+            <label *ngIf="ctrlPasswordUser.hasError('required')"
+                   class="label-text-alt text-warning">
+              Valor Requerido
+            </label>
+          </div>
         </div>
 
-      </div>
-      <div class="flex flex-col gap-1">
-        <label class="input input-bordered flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            class="h-4 w-4 opacity-70">
-            <path
-              fill-rule="evenodd"
-              d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-              clip-rule="evenodd" />
-          </svg>
-          <input [formControl]="ctrlPasswordUser"
-                 type="password" class="grow" value="password" placeholder="Contraseña" />
-        </label>
-        <div *ngIf="ctrlPasswordUser.touched && ctrlPasswordUser.invalid"
-             class="error">
-          <label *ngIf="ctrlPasswordUser.hasError('required')"
-                 class="label-text-alt text-warning">
-            Valor Requerido
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="text-right text-xs ">
-      <p>¿Olvidaste tu contraseña? <span class="font-semibold text-warning">Recuperala</span></p>
-    </div>
-    <div class="flex flex-col gap-4">
-      <button mat-flat-button color="primary" class="drop-shadow-md" >ENTRAR A LA BANCA</button>
-      <button mat-flat-button color="accent" class="drop-shadow-md">INGRESAR CON FACE ID</button>
-    </div>
 
-    <div class="flex flex-col items-center text-xs">
-      <p>¿No tienes cuenta con nosotros?</p>
-      <span class="font-semibold text-warning">Unete a nosotros</span>
+      </form>
+      <div class="text-right text-xs ">
+        <p>¿Olvidaste tu contraseña? <span class="font-semibold text-warning">Recuperala</span></p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <button mat-flat-button color="primary" class="drop-shadow-md" (click)="login()" [disabled]="form.invalid" >ENTRAR A LA BANCA</button>
+        <button mat-flat-button color="accent" class="drop-shadow-md">INGRESAR CON FACE ID</button>
+      </div>
+
+      <div class="flex flex-col items-center text-xs">
+        <p>¿No tienes cuenta con nosotros?</p>
+        <span class="font-semibold text-warning">Unete a nosotros</span>
+      </div>
     </div>
   </div>
 </div>

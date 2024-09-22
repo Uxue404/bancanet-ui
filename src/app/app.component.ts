@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.isMobile = this.deviceService.isMobile()
-    if(this.isMobile){
+    if(!this.isMobile){
       return
     }
     alert("Ingrese a la pagina en un celular")

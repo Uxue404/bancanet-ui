@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 justify-center">
+<div class="flex flex-col gap-4 justify-center text-xs">
   <div mat-dialog-title class="text-lg font-semibold text-texto">
     Tranferencias a Otros bancos
   </div>
@@ -46,12 +46,12 @@
 
   <div class="flex flex-col gap-1">
     <mat-dialog-actions class="flex justify-center gap-2">
-      <button mat-flat-button  class="btn-sm w-[60%] font-medium" color="primary">
+      <button mat-flat-button (click)="generarToken()" class="btn-sm w-[100%] font-medium" color="primary">
         Realizar Transferencia
       </button>
     </mat-dialog-actions>
     <mat-dialog-actions class="flex justify-center gap-2">
-      <button mat-flat-button  class="btn-sm w-[60%] font-medium" color="accent">
+      <button mat-flat-button [matDialogClose]="false" class="btn-sm w-[100%] font-medium" color="accent">
         Cerrar
       </button>
     </mat-dialog-actions>
