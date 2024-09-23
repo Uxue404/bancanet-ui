@@ -4,8 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {
-    path: '', // http://localhost:4200/home
-    loadComponent: () => import('./pages/home/home.component')
+    path: 'user', // http://localhost:4200/home/user
+    loadComponent: () => import('./pages/users/home/home.component')
+      .then(m => m.HomeComponent),
+  },
+  {
+    path: 'admon',
+    loadComponent: () => import('./pages/admin/home/home.component')
       .then(m => m.HomeComponent),
   }
 

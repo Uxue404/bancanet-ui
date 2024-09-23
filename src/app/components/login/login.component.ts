@@ -43,7 +43,13 @@ export class LoginComponent implements OnInit {
       this.getFormValues()
       const { userName, password } = this.form.value;
       this.authService.login(userName!,password!).subscribe({
-        next: ()=> {this.router.navigate(['/home'])
+        next: ()=> {
+          const role = localStorage.getItem("role");
+          console.log("local storage: "+ role);
+          if (role === 'user'){
+            this.router.navigate(['/home/user']);
+          } else this.router.navigate(['/home/admon']);
+
         },
         error: (e)=> console.error("Login failed" + e)
       })
@@ -51,6 +57,8 @@ export class LoginComponent implements OnInit {
       alert("formulario invalido")
       this.form.markAllAsTouched();
     }
+
+
   }
 
   ngOnInit(): void {

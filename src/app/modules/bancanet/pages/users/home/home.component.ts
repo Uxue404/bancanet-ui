@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NavbarComponent} from "../../../../components/navbar/navbar.component";
+import {NavbarComponent} from "../../../../../components/navbar/navbar.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {
   DatosMovimientoDialogComponent
-} from "../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
+} from "../../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
 import {FormControl, FormGroup} from "@angular/forms";
 
 

@@ -1,8 +1,0 @@
-{
-  "/auth/login": {
-    "target": "https://bancanet.vercel.app",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}
