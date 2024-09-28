@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuthRoleService} from "./auth-role.service";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {catchError, Observable, throwError} from "rxjs";
 
@@ -11,29 +9,24 @@ import {catchError, Observable, throwError} from "rxjs";
 export class ObtenerUsuariosNameService {
 
   private apiUrl = 'https://bancanet.vercel.app';
-  private token = this.authService.getToken();
 
 
   constructor(
-    private authRole: AuthRoleService,
     private http: HttpClient,
-    private router: Router,
     private authService: AuthService
   ) { }
 
-  searchUsers(name: string = '', email: string = '', phoneNumber: string = '', page:number=1, limit: number=10): Observable<UserResponse>{
+  searchUsers(query: string = '',searField: string = '' ,page:number=1, limit: number=10): Observable<UserResponse>{
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     })
-
+    const searchField = this.detectFielType(query);
     let params = new HttpParams()
+      .set(searchField, query)
       .set('page', page.toString())
-      .set('limit', limit.toString())
+      .set('limit', limit.toString());
 
-    if (name) params = params.set('name', name);
-    if (email) params = params.set('email', email);
-    if (phoneNumber) params = params.set('phoneNumber', phoneNumber);
     console.warn('Parámetros:', params.toString());
 
     return this.http.get<UserResponse>(`${this.apiUrl}/users/autocomplete`,{headers, params})
@@ -43,6 +36,22 @@ export class ObtenerUsuariosNameService {
           return throwError( ()=> new Error(error));
         })
       )
+  }
+
+  detectFielType(field: string):string{
+    // Validación para email
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Validación para número de teléfono (números de 7 a 15 dígitos, por ejemplo)
+    const phonePattern = /^[0-9]{1,15}$/;
+
+    if(emailPattern.test(field)){
+      return 'email'
+    }
+    if(phonePattern.test(field)){
+      console.warn("numero detectado")
+      return 'phoneNumber'
+    }
+    return 'name'
   }
 
 }

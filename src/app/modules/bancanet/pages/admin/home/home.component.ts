@@ -5,19 +5,21 @@ import {AuthService} from "../../../../../core/services/auth.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {debounce, debounceTime, distinctUntilChanged, switchMap} from "rxjs";
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, ReactiveFormsModule],
+  imports: [CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, ReactiveFormsModule, MatIconModule, MatMenuModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  private token = this.authService.getToken();
-  search: FormGroup;
+  // private token = this.authService.getToken();
+  search = new FormControl('');
   dataSource = new MatTableDataSource<User>([])
   displayedColumns: string[] = ['name','email','phoneNumber']
   total: number = 0;
@@ -27,31 +29,24 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private usersService: ObtenerUsuariosNameService,
-  private authService: AuthService,
+    private authService: AuthService,
     private fb: FormBuilder,
-  ) {
-    this.search = this.fb.group({
-      name: [''],
-      email: [''],
-      phoneNumber: ['']
-    })
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.search.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap(formValue => this.usersService.searchUsers(
-        formValue.name,
-        formValue.email,
-        formValue.phoneNumber
-      ))
-    ).subscribe(this.handleResponse.bind(this))
-    this.loadUsers()
+      switchMap(query =>{
+        const fielType = this.usersService.detectFielType(query || '');
+        return this.usersService.searchUsers(query || '',fielType)
+      })
+    ).subscribe(this.handleResponse.bind(this));
+    this.loadUsers(1, this.paginator.pageSize)
   }
-
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.paginator; // Asigna el paginador
+    this.loadUsers(1, 5); // Carga usuarios después de que el paginador esté listo
   }
 
 
@@ -66,16 +61,15 @@ export class HomeComponent implements OnInit {
     this.loadUsers(event.pageIndex + 1, event.pageSize);
   }
 
-  loadUsers(page: number = 1, limit: number = 10) {
-    const formValue = this.search.value;
-    this.usersService.searchUsers(
-      formValue.name,
-      formValue.email,
-      formValue.phoneNumber,
-      page,
-      limit
-    ).subscribe(this.handleResponse.bind(this));
+  loadUsers(page: number, limit: number) {
+    const searchValue = this.search.value || '';
+    const fieldType = this.usersService.detectFielType(searchValue);
+    this.usersService.searchUsers(searchValue,fieldType,page,limit)
+      .subscribe(this.handleResponse.bind(this))
+
   }
+
+
 
 
 

@@ -6,15 +6,9 @@
 
   <div class="w-full bg-white rounded-2xl drop-shadow-lg flex justify-between gap-4 p-3">
     <label class="input input-bordered flex items-center gap-2 w-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        class="h-4 w-4 opacity-70">
-        <path
-          d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-      </svg>
-      <input type="text" class="grow" placeholder="Nombre / Nombre Usuario" />
+
+        <input [formControl]="search" type="text" class="grow" placeholder="Buscar" />
+
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
@@ -26,22 +20,39 @@
           clip-rule="evenodd" />
       </svg>
     </label>
-    <button class="btn btn-active text-white font-medium bg-[#0d845f]">Primary</button>
+<!--    <button class="btn btn-active text-white font-medium bg-[#0d845f]">Primary</button>-->
+<!--    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">-->
+<!--      <mat-icon>more_vert</mat-icon>-->
+<!--    </button>-->
+<!--    <mat-menu #menu="matMenu">-->
+<!--      <button mat-menu-item (click)="setSearchField('email')">-->
+<!--        <mat-icon>email</mat-icon>-->
+<!--        <span>Email</span>-->
+<!--      </button>-->
+<!--      <button mat-menu-item (click)="setSearchField('name')" >-->
+<!--        <mat-icon>person</mat-icon>-->
+<!--        <span>Nombre</span>-->
+<!--      </button>-->
+<!--      <button mat-menu-item (click)="setSearchField('phoneNumber')">-->
+<!--        <mat-icon>phone</mat-icon>-->
+<!--        <span>Telefono</span>-->
+<!--      </button>-->
+<!--    </mat-menu>-->
   </div>
   <div class="p-3 ">
 
 
-    <form [formGroup]="search">
-      <mat-form-field>
-        <input matInput formControlName="name" placeholder="Buscar por nombre">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput formControlName="email" placeholder="Buscar por email">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput formControlName="phoneNumber" placeholder="Buscar por teléfono">
-      </mat-form-field>
-    </form>
+    <!--    <form [formGroup]="search">-->
+    <!--      <mat-form-field>-->
+    <!--        <input matInput formControlName="name" placeholder="Buscar por nombre">-->
+    <!--      </mat-form-field>-->
+    <!--      <mat-form-field>-->
+    <!--        <input matInput formControlName="email" placeholder="Buscar por email">-->
+    <!--      </mat-form-field>-->
+    <!--      <mat-form-field>-->
+    <!--        <input matInput formControlName="phoneNumber" placeholder="Buscar por teléfono">-->
+    <!--      </mat-form-field>-->
+    <!--    </form>-->
 
     <mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="name">
