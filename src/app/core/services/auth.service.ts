@@ -9,8 +9,8 @@ import {AuthRoleService} from "./auth-role.service";
   providedIn: 'root'
 })
 export class AuthService {
-  private  apiUrl = 'http://localhost:3000'
-  //private apiUrl = 'https://bancanet.vercel.app';
+  //private  apiUrl = 'http://localhost:3000'
+  private apiUrl = 'https://bancanet.vercel.app';
   private loginUrl = `${this.apiUrl}/auth/login`;
   private tokenKey = 'auth_token';
   constructor(

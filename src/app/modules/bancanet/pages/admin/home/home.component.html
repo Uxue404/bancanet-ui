@@ -1,1 +1,67 @@
-<p>home works!</p>
+<div class=" flex flex-col gap-4 h-screen mx-auto bg-fondo max-w-2xl text-center">
+  <p class="text-2xl pt-6 font-normal">
+    Bienvenido Admin
+    <span class="block font-semibold">Admin Name</span>
+  </p>
+
+  <div class="w-full bg-white rounded-2xl drop-shadow-lg flex justify-between gap-4 p-3">
+    <label class="input input-bordered flex items-center gap-2 w-full">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="h-4 w-4 opacity-70">
+        <path
+          d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+      </svg>
+      <input type="text" class="grow" placeholder="Nombre / Nombre Usuario" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="h-4 w-4 opacity-70">
+        <path
+          fill-rule="evenodd"
+          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+          clip-rule="evenodd" />
+      </svg>
+    </label>
+    <button class="btn btn-active text-white font-medium bg-[#0d845f]">Primary</button>
+  </div>
+  <div class="p-3 ">
+
+
+    <form [formGroup]="search">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Buscar por nombre">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Buscar por email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="phoneNumber" placeholder="Buscar por teléfono">
+      </mat-form-field>
+    </form>
+
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.phoneNumber}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="total" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
+
+  </div>
+</div>
