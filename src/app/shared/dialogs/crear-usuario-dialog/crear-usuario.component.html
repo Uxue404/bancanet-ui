@@ -1,0 +1,162 @@
+<div class="w-full flex flex-col gap-4 justify-center ">
+  <p mat-dialog-title class="text-lg text-center text-texto font-semibold">
+    Agregar usuario
+  </p>
+  <!-- Alerta de éxito -->
+  <div *ngIf="showAlertSuccess" role="alert" class="alert alert-success">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Usuario Creado con Exito</span>
+  </div>
+
+  <!-- Alerta de error -->
+  <div *ngIf="showAlertError" role="alert" class="alert alert-error">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Error! al crear Usuario</span>
+  </div>
+
+  <!-- Alerta de advertencia (formulario inválido) -->
+  <div *ngIf="showAlertWarning" role="alert" class="alert alert-warning">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span>Error Desconocido Llame a Soporte</span>
+  </div>
+
+
+  <mat-dialog-content >
+    <form [formGroup]="form">
+      <div class="flex flex-col gap-4 text-xs my-2 ">
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            people_alt
+          </mat-icon>
+          <input [formControl]="ctrlFirstName" type="text" class="grow" placeholder="Nombre">
+        </label>
+        <div *ngIf="ctrlFirstName.touched && ctrlFirstName.invalid"
+             class="error">
+          <label *ngIf="ctrlFirstName.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            people_alt
+          </mat-icon>
+          <input [formControl]="ctrlLastName" type="text" class="grow" placeholder="Apellido">
+        </label>
+        <div *ngIf="ctrlLastName.touched && ctrlLastName.invalid"
+             class="error">
+          <label *ngIf="ctrlLastName.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            account_circle
+          </mat-icon>
+          <input [formControl]="ctrlUserName" type="text" class="grow" placeholder="Nombre Usuario">
+        </label>
+        <div *ngIf="ctrlUserName.touched && ctrlUserName.invalid"
+             class="error">
+          <label *ngIf="ctrlUserName.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            phone
+          </mat-icon>
+          <input [formControl]="ctrlPhoneNumber" type="tel" class="grow" placeholder="1234567890" pattern="[0-9]{10}" required>
+        </label>
+        <div *ngIf="ctrlPhoneNumber.touched && ctrlPhoneNumber.invalid"
+             class="error">
+          <label *ngIf="ctrlPhoneNumber.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+          <label *ngIf="ctrlPhoneNumber.hasError('pattern')"
+                 class="label-text-alt text-warning">
+            Ingresa solo Numeros
+          </label>
+          <label *ngIf="ctrlPhoneNumber.hasError('max')"
+                 class="label-text-alt text-warning">
+            Ingresa un numero valido
+          </label>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            mail
+          </mat-icon>
+          <input [formControl]="ctrlEmail" type="email" class="grow" placeholder="Email">
+        </label>
+        <div *ngIf="ctrlEmail.touched && ctrlEmail.invalid"
+             class="error">
+          <label *ngIf="ctrlEmail.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+          <label *ngIf="ctrlEmail.hasError('email')"
+                 class="label-text-alt text-warning">
+            Email invalido
+          </label>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50">
+            password
+          </mat-icon>
+          <input [formControl]="ctrlPassword" type="password" class="grow" placeholder="Contraseña">
+        </label>
+        <div *ngIf="ctrlPassword.touched && ctrlPassword.invalid"
+             class="error">
+          <label *ngIf="ctrlPassword.hasError('required')"
+                 class="label-text-alt text-warning">
+            Valor Requerido
+          </label>
+        </div>
+
+
+
+
+      </div>
+    </form>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button (click)="crearUsuario()" class="w-[100%] text-white font-medium btn btn-sm fondo-gradiente"  >
+      Registrar Usuario
+    </button>
+  </mat-dialog-actions>
+
+</div>

@@ -9,19 +9,22 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular
 import {debounce, debounceTime, distinctUntilChanged, switchMap} from "rxjs";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {CrearUsuarioComponent} from "../../../../../shared/dialogs/crear-usuario-dialog/crear-usuario.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, ReactiveFormsModule, MatIconModule, MatMenuModule],
+  imports: [CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, ReactiveFormsModule, MatIconModule, MatMenuModule,MatDialogModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  // private token = this.authService.getToken();
+  private token = this.authService.getToken();
   search = new FormControl('');
   dataSource = new MatTableDataSource<User>([])
-  displayedColumns: string[] = ['name','email','phoneNumber']
+  displayedColumns: string[] = ['name', 'email', 'actions'];
+  name: string | null = ''
   total: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -31,9 +34,11 @@ export class HomeComponent implements OnInit {
     private usersService: ObtenerUsuariosNameService,
     private authService: AuthService,
     private fb: FormBuilder,
+    private matDialog: MatDialog,
   ) {  }
 
   ngOnInit(): void {
+    this.name = localStorage.getItem('name');
     this.search.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -42,14 +47,16 @@ export class HomeComponent implements OnInit {
         return this.usersService.searchUsers(query || '',fielType)
       })
     ).subscribe(this.handleResponse.bind(this));
-    this.loadUsers(1, this.paginator.pageSize)
+    this.loadUsers(1, 5)
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator; // Asigna el paginador
+    // this.dataSource.paginator = this.paginator; // Asigna el paginador
     this.loadUsers(1, 5); // Carga usuarios después de que el paginador esté listo
   }
 
-
+  logout(){
+    this.authService.logout();
+  }
   handleResponse(response: any) {
     this.dataSource.data = response.result.users;
     this.total = response.result.total;
@@ -67,6 +74,12 @@ export class HomeComponent implements OnInit {
     this.usersService.searchUsers(searchValue,fieldType,page,limit)
       .subscribe(this.handleResponse.bind(this))
 
+  }
+
+  crearUsuario(){
+    this.matDialog.open(CrearUsuarioComponent, {
+      width: '90%'
+    })
   }
 
 

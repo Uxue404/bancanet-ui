@@ -23,7 +23,7 @@ import {
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private matDialog: MatDialog,
+   private matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {

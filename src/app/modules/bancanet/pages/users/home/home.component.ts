@@ -6,12 +6,15 @@ import {
   DatosMovimientoDialogComponent
 } from "../../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
 import {FormControl, FormGroup} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import {AuthService} from "../../../../../core/services/auth.service";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent,MatDialogModule],
+  imports: [CommonModule, NavbarComponent, MatDialogModule, MatIconModule, MatMenuModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -22,6 +25,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private matDialog: MatDialog,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -101,7 +105,9 @@ export class HomeComponent implements OnInit {
       }
     }
   ];
-
+  logout(){
+    this.authService.logout();
+  }
   modalMovimiento(id:number){
     console.log(id);
     const movimiento = this.ejemploMovimiento.find(t => t.idTransaccion === id);

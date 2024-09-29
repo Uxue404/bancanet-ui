@@ -1,11 +1,21 @@
-<div class="h-screen max-w-2xl bg-fondo mx-auto">
-  <div class="flex flex-col w-full px-2 pt-6 gap-4 ">
+<div class="h-screen max-w-2xl bg-fondo mx-auto relative">
+  <button [matMenuTriggerFor]="menu" class="btn btn-circle btn-sm absolute top-4 left-2 no-animation">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar Sesion</span>
+    </button>
+  </mat-menu>
+  <p class="px-5 pt-3 text-center font-medium text-2xl">Mis Tarjetas</p>
 
+  <div class="flex flex-col w-full px-2  gap-4 relative">
     <!--CARDS-->
-    <div class="w-full  justify-center flex  bg-white rounded-2xl p-3 drop-shadow-lg">
+    <div class="w-auto justify-center flex rounded-2xl p-3 drop-shadow-lg">
       <!--      CREDIT CARD-->
       <ng-container  *ngIf="usuarioLogeado.idUser === 1">
-      <div class="fondo-gradiente w-[23rem] h-[13rem] rounded-2xl p-6 text-white shadow-lg flex flex-col justify-between">
+      <div class="fondo-gradiente w-[20rem] h-[10rem] rounded-2xl px-6 pt-3 text-white shadow-lg flex flex-col justify-between">
         <div>
             <p class="text-lg tracking-widest"> {{ usuarioLogeado.nombre + " " + usuarioLogeado.apellido}}</p>
 

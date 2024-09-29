@@ -43,8 +43,11 @@ export class AuthService {
     const tokenPayload = JSON.parse(atob(arrayToken[1]));
     console.log(tokenPayload);
     const role:string = tokenPayload.payload.role;
-    console.log("role: " + role);
+
     this.authRole.setRole(role);
+    const nameUser:string = tokenPayload.payload.name;
+    localStorage.setItem('name', nameUser)
+    console.log('nameUser: ' + localStorage.getItem('name'))
     localStorage.setItem('role', role);
     // if(role === "user"){
     //   this.router.navigate(['home/user'])
@@ -63,6 +66,7 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
+
   isAuthenticated():boolean{
     const token = this.getToken()
     if(!token){
@@ -76,7 +80,10 @@ export class AuthService {
 
   logout():void{
     localStorage.removeItem(this.tokenKey);
-    this.router.navigate(['/login'])
+    localStorage.removeItem('name');
+    localStorage.removeItem('role');
+    this.router.navigate(['/'])
+    console.log("Adioooos")
   }
 
 

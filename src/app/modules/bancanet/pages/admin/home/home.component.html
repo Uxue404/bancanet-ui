@@ -1,13 +1,24 @@
-<div class=" flex flex-col gap-4 h-screen mx-auto bg-fondo max-w-2xl text-center">
+<div class=" flex flex-col gap-4 h-screen mx-auto bg-fondo max-w-2xl text-center px-2 relative">
+
+  <button [matMenuTriggerFor]="menu" class="btn btn-circle absolute top-6 left-2">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar Sesion</span>
+    </button>
+  </mat-menu>
+
   <p class="text-2xl pt-6 font-normal">
     Bienvenido Admin
-    <span class="block font-semibold">Admin Name</span>
+    <span class="block font-semibold">{{this.name}}</span>
   </p>
 
   <div class="w-full bg-white rounded-2xl drop-shadow-lg flex justify-between gap-4 p-3">
     <label class="input input-bordered flex items-center gap-2 w-full">
 
-        <input [formControl]="search" type="text" class="grow" placeholder="Buscar" />
+      <input [formControl]="search" type="text" class="grow" placeholder="Buscar" />
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,59 +31,60 @@
           clip-rule="evenodd" />
       </svg>
     </label>
-<!--    <button class="btn btn-active text-white font-medium bg-[#0d845f]">Primary</button>-->
-<!--    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">-->
-<!--      <mat-icon>more_vert</mat-icon>-->
-<!--    </button>-->
-<!--    <mat-menu #menu="matMenu">-->
-<!--      <button mat-menu-item (click)="setSearchField('email')">-->
-<!--        <mat-icon>email</mat-icon>-->
-<!--        <span>Email</span>-->
-<!--      </button>-->
-<!--      <button mat-menu-item (click)="setSearchField('name')" >-->
-<!--        <mat-icon>person</mat-icon>-->
-<!--        <span>Nombre</span>-->
-<!--      </button>-->
-<!--      <button mat-menu-item (click)="setSearchField('phoneNumber')">-->
-<!--        <mat-icon>phone</mat-icon>-->
-<!--        <span>Telefono</span>-->
-<!--      </button>-->
-<!--    </mat-menu>-->
   </div>
-  <div class="p-3 ">
-
-
-    <!--    <form [formGroup]="search">-->
-    <!--      <mat-form-field>-->
-    <!--        <input matInput formControlName="name" placeholder="Buscar por nombre">-->
-    <!--      </mat-form-field>-->
-    <!--      <mat-form-field>-->
-    <!--        <input matInput formControlName="email" placeholder="Buscar por email">-->
-    <!--      </mat-form-field>-->
-    <!--      <mat-form-field>-->
-    <!--        <input matInput formControlName="phoneNumber" placeholder="Buscar por teléfono">-->
-    <!--      </mat-form-field>-->
-    <!--    </form>-->
-
-    <mat-table [dataSource]="dataSource">
+  <div class="w-full bg-white rounded-2xl drop-shadow-lg p-3 gap-4 ">
+    <table mat-table [dataSource]="dataSource" class="w-full text-left border-gray-900">
+      <!-- Columna Nombre -->
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
+        <td mat-cell *matCellDef="let user"
+            class="text-sm"> {{user.name}} </td>
       </ng-container>
+
+      <!-- Columna Email -->
       <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="phoneNumber">
-        <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{user.phoneNumber}} </mat-cell>
+        <td mat-cell *matCellDef="let user"
+            class="datos-secundarios text-subText"> {{user.email}} </td>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+      <!-- Columna Acciones -->
+      <ng-container matColumnDef="actions">
+        <td mat-cell *matCellDef="let user">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="text-xs">
+            <button mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>paid</mat-icon>
+              <span>Transferencia</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
 
-    <mat-paginator [length]="total" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="total"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="onPageChange($event)"
+                   aria-label="Seleccionar página de usuarios">
+    </mat-paginator>
 
   </div>
+
+  <button (click)="crearUsuario()"
+          class="btn btn-circle absolute bottom-6 right-6 fondo-gradiente" >
+    <mat-icon class="text-white font-bold">
+      add
+    </mat-icon>
+  </button>
 </div>
