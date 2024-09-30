@@ -32,7 +32,8 @@
       </svg>
     </label>
   </div>
-  <div class="w-full bg-white rounded-2xl drop-shadow-lg p-3 gap-4 ">
+  <div class="w-full max-h-80 bg-white rounded-2xl drop-shadow-lg p-3 gap-4 overflow-y-auto ">
+
     <table mat-table [dataSource]="dataSource" class="w-full text-left border-gray-900">
       <!-- Columna Nombre -->
       <ng-container matColumnDef="name">
@@ -72,7 +73,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [length]="total"
+    <mat-paginator
+      [length]="total"
                    [pageSize]="5"
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    (page)="onPageChange($event)"
@@ -82,7 +84,7 @@
   </div>
 
   <button (click)="crearUsuario()"
-          class="btn btn-circle absolute bottom-6 right-6 fondo-gradiente" >
+          class="btn btn-circle absolute bottom-2 right-2 fondo-gradiente" >
     <mat-icon class="text-white font-bold">
       add
     </mat-icon>
