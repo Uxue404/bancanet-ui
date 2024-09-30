@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "ngx-device-detector": "^4.0.1",
+    "ngx-ui-loader": "^13.0.0",
     "rxjs": "~7.5.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tslib": "^2.3.0",

@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormBuilder } 
 import {MatIconModule} from "@angular/material/icon";
 import {AuthService} from "../../core/services/auth.service";
 import {Router} from "@angular/router";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-login',
@@ -15,9 +15,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-
-
+  isLoading = false;
   form = new FormGroup<formType>({
     userName: new FormControl<string>('', {
       nonNullable: true,
@@ -36,22 +34,29 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private loaderService: NgxUiLoaderService
   ) { }
 
   login(){
     if (this.form.valid){
       this.getFormValues()
+      this.loaderService.start()
       const { userName, password } = this.form.value;
       this.authService.login(userName!,password!).subscribe({
-        next: ()=> {
+
+          next: ()=> {
+          this.isLoading = true;
           const role = localStorage.getItem("role");
           console.log("local storage: "+ role);
           if (role === 'user'){
             this.router.navigate(['/home/user']);
           } else this.router.navigate(['/home/admon']);
-
+          this.loaderService.stop()
         },
-        error: (e)=> console.error("Login failed" + e)
+        error: (e)=> {
+          this.isLoading = false
+          console.error("Login failed" + e)
+        }
       })
     } else {
       alert("formulario invalido")
@@ -78,6 +83,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  protected readonly console = console;
 }
 type formType = {
   userName: FormControl<string>,

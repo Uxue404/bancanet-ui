@@ -1,3 +1,6 @@
 .fondo-gradiente{
   @apply bg-gradient-to-r from-emerald-500 to-emerald-900
 }
+label{
+  @apply gap-2
+}

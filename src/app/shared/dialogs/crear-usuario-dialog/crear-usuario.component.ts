@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegistrarUsuarioService} from "../../../core/services/registrar-usuario.service";
 import {ObtenerUsuariosNameService} from "../../../core/services/obtener-usuarios-name.service";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-crear-usuario-dialog',
@@ -64,6 +65,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   constructor(
     private usersService: RegistrarUsuarioService,
+    private loaderService: NgxUiLoaderService
   ) { }
 
   ngOnInit(): void {
@@ -100,10 +102,12 @@ export class CrearUsuarioComponent implements OnInit {
         ...this.form.value,
         role: 'user'
       };
+      this.loaderService.start()
       this.usersService.registrarUsuario(formData).subscribe(
         (r) => {
           this.showAlertSuccess = true
           this.resetFormValues()
+          this.loaderService.stop()
         },
         (e)=>{
           this.showAlertError = true
