@@ -58,6 +58,7 @@ export class ObtenerUsuariosNameService {
 
 export interface User {
   name: string;
+  lastName: string;
   email: string;
   phoneNumber: string;
   userName: string;

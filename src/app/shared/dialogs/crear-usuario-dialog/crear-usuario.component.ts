@@ -110,6 +110,7 @@ export class CrearUsuarioComponent implements OnInit {
           this.loaderService.stop()
         },
         (e)=>{
+          this.loaderService.stop()
           this.showAlertError = true
           console.error("Error al Registra el usaurio", e)
         }

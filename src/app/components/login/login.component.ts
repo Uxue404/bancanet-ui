@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
           this.loaderService.stop()
         },
         error: (e)=> {
+          this.loaderService.stop()
           this.isLoading = false
           console.error("Login failed" + e)
         }

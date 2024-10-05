@@ -11,6 +11,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {CrearUsuarioComponent} from "../../../../../shared/dialogs/crear-usuario-dialog/crear-usuario.component";
+import {
+  EditarUsuarioDialogComponent
+} from "../../../../../shared/dialogs/editar-usuario-dialog/editar-usuario-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
   private token = this.authService.getToken();
   search = new FormControl('');
   dataSource = new MatTableDataSource<User>([])
-  displayedColumns: string[] = ['name', 'email', 'actions'];
+  displayedColumns: string[] = ['name','lastName', 'email', 'actions'];
   name: string | null = ''
   total: number = 0;
 
@@ -44,6 +47,7 @@ export class HomeComponent implements OnInit {
       distinctUntilChanged(),
       switchMap(query =>{
         const fielType = this.usersService.detectFielType(query || '');
+
         return this.usersService.searchUsers(query || '',fielType)
       })
     ).subscribe(this.handleResponse.bind(this));
@@ -77,11 +81,28 @@ export class HomeComponent implements OnInit {
   }
 
   crearUsuario(){
-    this.matDialog.open(CrearUsuarioComponent, {
+    const dialogRef = this.matDialog.open(CrearUsuarioComponent, {
       width: '90%'
+    })
+
+    dialogRef.afterClosed().subscribe(r =>{
+      this.loadUsers(this.paginator.pageIndex +1, this.paginator.pageSize)
     })
   }
 
+  editarUsuario(idUser: string){
+    // console.warn('idUser: ' + idUser)
+    const dialogRef = this.matDialog.open(EditarUsuarioDialogComponent,{
+      width: '90%',
+      data:{
+        id: idUser
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(r =>{
+      this.loadUsers(this.paginator.pageIndex +1, this.paginator.pageSize)
+    })
+  }
 
 
 
