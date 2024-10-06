@@ -27,7 +27,7 @@ export class ObtenerUsuariosNameService {
       .set('page', page.toString())
       .set('limit', limit.toString());
 
-    console.warn('Parámetros:', params.toString());
+    // console.warn('Parámetros:', params.toString());
 
     return this.http.get<UserResponse>(`${this.apiUrl}/users/autocomplete`,{headers, params})
       .pipe(

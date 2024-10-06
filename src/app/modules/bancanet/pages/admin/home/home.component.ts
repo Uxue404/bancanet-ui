@@ -14,6 +14,9 @@ import {CrearUsuarioComponent} from "../../../../../shared/dialogs/crear-usuario
 import {
   EditarUsuarioDialogComponent
 } from "../../../../../shared/dialogs/editar-usuario-dialog/editar-usuario-dialog.component";
+import {
+  CrearCuentaBancariaDialogComponent
+} from "../../../../../shared/dialogs/crear-cuenta-bancaria-dialog/crear-cuenta-bancaria-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -101,6 +104,16 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(r =>{
       this.loadUsers(this.paginator.pageIndex +1, this.paginator.pageSize)
+    })
+  }
+
+  crearCuenta(idUser: string, nameUser: string){
+    this.matDialog.open(CrearCuentaBancariaDialogComponent,{
+      width: '90%',
+      data:{
+        id: idUser,
+        name: nameUser
+      }
     })
   }
 

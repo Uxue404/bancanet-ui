@@ -1,0 +1,42 @@
+<div class="gap-4">
+  <p mat-dialog-title class="text-lg font-semibold text-texto text-center">
+    Crear Cuenta Bancaria
+  </p>
+  <!--  Alertas -->
+
+  <mat-dialog-content>
+    <form>
+      <p>
+        Usuario:
+      </p>
+      <div class="flex flex-col gap-4 text-xs my-2">
+        <label class="input input-bordered flex items-center gap-2">
+          <mat-icon class="opacity-50 pr-6">
+            credit_card
+          </mat-icon>
+          <input type="number" class="grow" placeholder="Numero de cuenta">
+        </label>
+
+        <select class="select select-bordered w-full max-w-xs text-lg opacity-50">
+          <option disabled selected>Tipo de cuenta          </option>
+          <option>Debito</option>
+          <option>Credito</option>
+        </select>
+
+        <label class="input input-bordered flex items-center gap-2">
+          <mat-icon class="opacity-50 pr-6">
+            paid
+          </mat-icon>
+          <input type="number" class="grow" placeholder="Balance">
+        </label>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="w-full text-white font-medium btn btn-sm fondo-gradiente">
+      Crear Cuenta
+    </button>
+  </mat-dialog-actions>
+
+</div>
