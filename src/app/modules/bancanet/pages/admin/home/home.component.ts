@@ -17,6 +17,9 @@ import {
 import {
   CrearCuentaBancariaDialogComponent
 } from "../../../../../shared/dialogs/crear-cuenta-bancaria-dialog/crear-cuenta-bancaria-dialog.component";
+import {
+  ConfirmarEliminarUsuarioDialogComponent
+} from "../../../../../shared/dialogs/confirmar-eliminar-usuario-dialog/confirmar-eliminar-usuario-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -114,6 +117,19 @@ export class HomeComponent implements OnInit {
         id: idUser,
         name: nameUser
       }
+    })
+  }
+
+  eliminarUsuario(idUser: string){
+    const dialogRef = this.matDialog.open(ConfirmarEliminarUsuarioDialogComponent,{
+      width: '90%',
+      data : {
+        id: idUser
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(r =>{
+      this.loadUsers(this.paginator.pageIndex +1, this.paginator.pageSize)
     })
   }
 

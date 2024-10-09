@@ -1,0 +1,42 @@
+<div class="gap-8">
+  <p *ngIf="!usuarioEliminado"
+    mat-dialog-title
+     class="text-lg font-semibold text-texto text-center">
+    ¿Estas seguro de eliminar un usario?
+  </p>
+
+  <div class="w-full flex gap-4 justify-around">
+    <!-- Alerta de éxito -->
+    <div *ngIf="showAlertSuccess" role="alert" class="alert alert-success">
+      <span>Usuario Eliminado con Exito</span>
+    </div>
+
+    <!-- Alerta de error -->
+    <div *ngIf="showAlertError" role="alert" class="alert alert-error">
+      <span>Error! al eliminar Usuario</span>
+    </div>
+
+  </div >
+  <div *ngIf="!usuarioEliminado">
+    <mat-dialog-actions>
+      <button (click)="eliminarUsuario(data.id)"
+              class="w-full text-white font-medium btn btn-sm fondo-gradiente">
+        SI
+      </button>
+    </mat-dialog-actions>
+    <mat-dialog-actions>
+      <button mat-dialog-close class="w-full btn btn-sm">
+        NO
+      </button>
+    </mat-dialog-actions>
+  </div>
+  <div *ngIf="usuarioEliminado">
+    <mat-dialog-actions>
+      <button  mat-dialog-close
+              class="btn btn-sm w-full">
+        Cerrar
+      </button>
+    </mat-dialog-actions>
+  </div>
+
+</div>
