@@ -110,12 +110,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  crearCuenta(idUser: string, nameUser: string){
+  crearCuenta(idUser: string,){
     this.matDialog.open(CrearCuentaBancariaDialogComponent,{
       width: '90%',
       data:{
         id: idUser,
-        name: nameUser
       }
     })
   }

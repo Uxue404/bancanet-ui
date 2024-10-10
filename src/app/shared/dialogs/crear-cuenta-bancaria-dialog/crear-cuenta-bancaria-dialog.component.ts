@@ -13,12 +13,12 @@ import {MatIconModule} from "@angular/material/icon";
 export class CrearCuentaBancariaDialogComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:{id: string, name:string}
+    @Inject(MAT_DIALOG_DATA) public data:{id: string}
   ) { }
 
   ngOnInit(): void {
     console.warn(this.data.id)
-    console.warn(this.data.name)
+
   }
 
 }
