@@ -12,6 +12,7 @@ export class ObtenerUsuarioIdService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+
   ) { }
 
   obtenerUsuarioId(idUser: string): Observable<any>{

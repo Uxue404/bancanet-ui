@@ -5,7 +5,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegistrarUsuarioService} from "../../../core/services/registrar-usuario.service";
-import {ObtenerUsuariosNameService} from "../../../core/services/obtener-usuarios-name.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
@@ -117,6 +116,7 @@ export class CrearUsuarioComponent implements OnInit {
       )
     }else {
       this.showAlertWarning = true
+      this.loaderService.stop()
     }
   }
 
