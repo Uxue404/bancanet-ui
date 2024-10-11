@@ -30,7 +30,7 @@ register();
 })
 export class HomeComponent implements OnInit {
   id: string | null = ''
-  transaccion: any = null;
+  transaccion: any[] = [];
   nombreUsuario: string | null = '';
   listaCuentas: any
   isDigitalCardActive:boolean = false
@@ -61,26 +61,14 @@ export class HomeComponent implements OnInit {
 
   }
 
-  obtenerUsuario(){
-    this.id = this.authService.getId()
-    console.warn(this.id)
-    this.obtenerUsuarioId.obtenerUsuarioId(this.id!).subscribe(
-      (data: any)=>{
-        console.warn(data);
-      },
-      (error)=>{
-        console.log(error);
-      }
-    )
-  }
 
 
   obtenerMovimientos(){
     this.id = this.authService.getId()
     this.obtenerTransacciones.obtenerTransaccionesUsuario(this.id!).subscribe(
-      (data)=>{
-        this.transaccion = data
-        // console.log(this.transaccion)
+      (data:any)=>{
+        this.transaccion = data.result;
+        console.log(this.transaccion)
       },
       (erro) =>{
         console.log(erro)

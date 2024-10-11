@@ -18,7 +18,6 @@ export class DatosMovimientoDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(JSON.stringify(this.data));
   }
 
 }
