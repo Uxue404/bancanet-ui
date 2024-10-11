@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           next: ()=> {
           this.isLoading = true;
           const role = localStorage.getItem("role");
-          console.log("local storage: "+ role);
+          // console.log("local storage: "+ role);
           if (role === 'user'){
             this.router.navigate(['/home/user']);
           } else this.router.navigate(['/home/admon']);
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
 
   getFormValues(): void {
     const formValues = this.form.value;
-    console.log('Form Values:', formValues);
+    // console.log('Form Values:', formValues);
 
   }
 

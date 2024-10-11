@@ -13,6 +13,7 @@ export class AuthService {
   private apiUrl = 'https://bancanet.vercel.app';
   private loginUrl = `${this.apiUrl}/auth/login`;
   private tokenKey = 'auth_token';
+  private idUser = ''
   constructor(
     private authRole: AuthRoleService,
     private http: HttpClient,
@@ -30,7 +31,7 @@ export class AuthService {
       tap(res =>{
         if (res.token){
           this.setToken(res.token)
-          console.log("Token: " + res.token);
+          // console.log("Token: " + res.token);
           this.decodeToken(res.token)
         }
       })
@@ -41,21 +42,16 @@ export class AuthService {
   decodeToken(token:string):void {
     const arrayToken = token.split(".");
     const tokenPayload = JSON.parse(atob(arrayToken[1]));
-    console.log(tokenPayload);
+    // console.log(tokenPayload);
     const role:string = tokenPayload.payload.role;
 
     this.authRole.setRole(role);
     const nameUser:string = tokenPayload.payload.name;
+    const id:string = tokenPayload.payload.id;
     localStorage.setItem('name', nameUser)
-    console.log('nameUser: ' + localStorage.getItem('name'))
     localStorage.setItem('role', role);
-    // if(role === "user"){
-    //   this.router.navigate(['home/user'])
-    // }else if (role === "admin"){
-    //   this.router.navigate(['home/admin'])
-    // }else {
-    //   alert("No se encontro rol usuario")
-    // }
+    this.setId(id)
+
   }
 
   private setToken(token: string): void {
@@ -64,6 +60,14 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
+  }
+
+  private setId(id: string):void{
+    localStorage.setItem('id', id);
+  }
+
+  getId(): string | null{
+    return localStorage.getItem('id');
   }
 
 

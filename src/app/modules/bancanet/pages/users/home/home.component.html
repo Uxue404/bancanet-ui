@@ -1,74 +1,80 @@
 <div class="h-auto max-w-2xl bg-fondo mx-auto flex flex-col w-full px-4 py-10  gap-4 items-center">
-    <div class="w-full px-2 py-3 bg-white rounded-2xl flex justify-between items-center">
-      <div class="avatar ">
-        <div class=" w-12 rounded-full ">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-        </div>
+  <div class="w-full px-2 py-3 bg-white rounded-2xl flex justify-between items-center">
+    <div class="avatar ">
+      <div class=" w-12 rounded-full ">
+        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
       </div>
-      <div class="flex items-center text-left text-lg -ml-8">
+    </div>
+    <div class="flex items-center text-left text-lg -ml-8">
         <span>Hola
           <span class="font-bold ">
-              {{ usuarioLogeado.nombre + " " + usuarioLogeado.apellido}}
+            {{nombreUsuario}}
             </span>
         </span>
-      </div>
+    </div>
 
-      <button [matMenuTriggerFor]="menu" class="btn btn-circle btn-sm no-animation">
-        <mat-icon>menu</mat-icon>
+    <button [matMenuTriggerFor]="menu" class="btn btn-circle btn-sm no-animation">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesion</span>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Cerrar Sesion</span>
-        </button>
-      </mat-menu>
-    </div>
-    <!--      CREDIT CARD-->
-    <div class="w-full px-2">
-      <ng-container  *ngIf="usuarioLogeado.idUser === 1">
-        <div class="fondo-gradiente w-full h-auto rounded-2xl px-6 py-3 text-white shadow-lg flex flex-col justify-between">
+    </mat-menu>
+  </div>
+  <!--      CREDIT CARD-->
+  <div class="w-full px-2">
+    <swiper-container class="mySwiper" effect="cards" grab-cursor="true">
+      <ng-container *ngFor="let card of listaCuentas?.result">
+        <swiper-slide>
 
-          <div class="flex items-center justify-between h-[6rem] ">
+          <div class="fondo-gradiente w-full h-auto rounded-2xl px-6 py-3 text-white shadow-lg flex flex-col justify-between">
+
+            <div class="flex items-center justify-between h-[6rem] ">
           <span class="flex items-center text-lg tracking-widest font-medium h-full">
-            {{usuarioLogeado.cuenta.saldoDisponible | currency:'USD': 'symbol'}}
+            {{card.balance}}
           </span>
-            <svg  class="object-contain" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 48 48">
-              <path fill="#ff9800" d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"></path><path fill="#d50000" d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"></path><path fill="#ff3d00" d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"></path>
-            </svg>
+              <svg  class="object-contain" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 48 48">
+                <path fill="#ff9800" d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"></path><path fill="#d50000" d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"></path><path fill="#ff3d00" d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"></path>
+              </svg>
 
+            </div>
           </div>
-        </div>
+        </swiper-slide>
       </ng-container>
-    </div>
+
+    </swiper-container>
+  </div>
 
 
-    <div class="w-full p-2 bg-white flex justify-between items-center rounded-2xl">
-      <span class="ms-3 text-sm font-medium">Activar Tarjeta Digital</span>
-      <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" value="" class="sr-only peer" checked>
-        <div class="relative w-11 h-6 bg-gray-200 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r from-emerald-500 to-emerald-900"></div>
-      </label>
+  <div class="w-full p-2 bg-white flex justify-between items-center rounded-2xl">
+    <span class="ms-3 text-sm font-medium">Activar Tarjeta Digital</span>
+    <label class="inline-flex items-center cursor-pointer">
+      <input type="checkbox" value="" class="sr-only peer" checked>
+      <div class="relative w-11 h-6 bg-gray-200 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r from-emerald-500 to-emerald-900"></div>
+    </label>
 
-    </div>
+  </div>
 
 
 
-<div class="flex-col gap-6 w-full p-3 bg-white flex justify-center rounded-2xl ">
-  <span class="text-left px-3 text-sm font-medium">Transacciones</span>
-  <ng-container *ngFor="let i of ejemploMovimiento">
-    <div (click)="modalMovimiento(i.idTransaccion)"
-         class="w-full bg-white flex p-3 justify-between shadow-inner rounded-2xl">
-      <div class="flex flex-col gap-4">
-        <span class="font-medium text-xs">{{i.contenido.lugar}}</span>
-        <span class="datos-secundarios">{{ i.contenido.tipoCargo? 'Cargo': 'Abono' }}</span>
+  <div class="flex-col gap-6 w-full p-3 bg-white flex justify-center rounded-2xl ">
+    <span class="text-left px-3 text-sm font-medium">Transacciones</span>
+    <ng-container *ngIf="transaccion" >
+      <div
+        class="w-full bg-white flex p-3 justify-between shadow-inner rounded-2xl">
+        <div class="flex flex-col gap-4">
+          <span class="font-medium text-xs">{{transaccion.description}}</span>
+          <span class="datos-secundarios">{{transaccion.type === 'transfer' ? 'Transferencia' : 'Cargo'}}</span>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <span class="font-medium">{{transaccion.amount}}</span>
+          <span class="datos-secundarios">{{transaccion.date | date:'short'}}</span>
+        </div>
       </div>
-      <div class="flex flex-col items-center gap-1">
-        <span class=" {{i.contenido.tipoCargo? 'text-red-400': 'text-green-500'}} font-medium">{{ i.contenido.monto |currency: 'USD':'symbol' }}</span>
-        <span class="datos-secundarios">{{i.contenido.fechaHora | date:'dd/MM/yyyy'}}</span>
-      </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>
-</div>
-  <app-navbar class="w-screen mx-auto fixed bottom-0"></app-navbar>
+<app-navbar class="w-screen mx-auto fixed bottom-0"></app-navbar>
 
