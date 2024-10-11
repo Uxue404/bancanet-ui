@@ -13,7 +13,7 @@ import {TokenDialogComponent} from "../token-dialog/token-dialog.component";
   styleUrls: ['./formulario-transferencia-dialog.component.scss']
 })
 export class FormularioTransferenciaDialogComponent implements OnInit {
-
+  transferActive: boolean= false
   constructor(
     private matDialog: MatDialog,
   ) { }
@@ -22,7 +22,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
   }
 
   generarToken(){
-    
+
     this.matDialog.open(TokenDialogComponent,{
       restoreFocus: false,
       width: '90%'

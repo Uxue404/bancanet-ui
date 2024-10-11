@@ -1,29 +1,29 @@
 <div class="flex flex-col gap-4">
-  <div mat-dialog-title class="text-lg font-bold text-texto">
+  <div mat-dialog-title class="text-xl font-bold text-texto">
     Datos de Movimiento
   </div>
   <mat-dialog-content>
-    <div class="flex flex-col gap-2 text-xs">
-      <div>
+    <div class="flex flex-col gap-3">
+      <div class="gap-2">
         <p class="font-medium text-sm ">Monto</p>
-        <span class="font-medium text-xs text-subText">{{data.monto | currency:'USD': 'symbol'}}</span>
+        <span class="font-medium text-xs text-subText">{{data.amount | currency: 'USD':'symbol'}}</span>
       </div>
-      <div>
-        <p class="font-medium text-sm ">Beneficiario / Lugar</p>
-        <span class="font-medium text-xs text-subText">{{data.lugar}}</span>
+      <div class="gap-2">
+        <p class="font-medium text-sm ">Descripción</p>
+        <span class="font-medium text-xs text-subText">{{data.description}}</span>
       </div>
-      <div>
+      <div class="gap-2">
         <p class="font-medium text-sm ">Cuenta</p>
-        <span class="font-medium text-xs text-subText">{{data.numeroCuenta}}</span>
+        <span class="font-medium text-xs text-subText">{{data.account.accountNumber}}</span>
       </div>
-      <div>
+      <div class="gap-2">
         <p class="font-medium text-sm ">Fecha</p>
-        <span class="font-medium text-xs text-subText">{{data.fechaHora | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+        <span class="font-medium text-xs text-subText">{{data.date | date:'short'}}</span>
       </div>
-      <div>
-        <p class="font-medium text-sm ">Satatus</p>
-        <span class="font-medium text-xs text-subText">{{data.status}}</span>
-      </div>
+<!--      <div>-->
+<!--        <p class="font-medium text-sm ">Satatus</p>-->
+<!--        <span class="font-medium text-xs text-subText"></span>-->
+<!--      </div>-->
     </div>
   </mat-dialog-content>
   <mat-dialog-actions class="flex justify-center">

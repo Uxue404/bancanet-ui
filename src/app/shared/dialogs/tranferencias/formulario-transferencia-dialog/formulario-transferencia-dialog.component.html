@@ -1,9 +1,14 @@
 <div class="flex flex-col gap-4 justify-center text-xs">
   <div mat-dialog-title class="text-lg font-semibold text-texto">
-    Tranferencias a Otros bancos
+    {{transferActive ? 'Tranferencias a Otros bancos':'No se puede realizar transferencias'}}
+
   </div>
 
-  <mat-dialog-content >
+  <mat-dialog-content *ngIf="!transferActive">
+    <span class="font-medium text-xs text-subText">Conctacte a Soporte para activar su tarjeta</span>
+  </mat-dialog-content>
+
+  <mat-dialog-content *ngIf="transferActive" >
     <div class="flex flex-col gap-4 text-xs my-4">
 
       <label class="input input-bordered flex items-center gap-4">
@@ -44,9 +49,9 @@
 
   </mat-dialog-content>
 
-  <div class="flex flex-col gap-1">
+  <div *ngIf="transferActive" class="flex flex-col gap-1">
     <mat-dialog-actions class="flex justify-center gap-2">
-      <button mat-flat-button (click)="generarToken()" class="btn-sm w-[100%] font-medium" color="primary">
+      <button  mat-flat-button (click)="generarToken()" class="btn-sm w-[100%] font-medium" color="primary">
         Realizar Transferencia
       </button>
     </mat-dialog-actions>
@@ -56,4 +61,10 @@
       </button>
     </mat-dialog-actions>
   </div>
+
+  <mat-dialog-actions *ngIf="!transferActive">
+    <button mat-flat-button [matDialogClose]="false" class="btn-sm w-[100%] font-medium" color="accent">
+      Cerrar
+    </button>
+  </mat-dialog-actions>
 </div>

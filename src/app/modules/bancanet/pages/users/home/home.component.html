@@ -24,10 +24,10 @@
     </mat-menu>
   </div>
   <!--      CREDIT CARD-->
-  <div class="w-full px-2">
+  <div class="w-full max-w-lg px-6">
     <swiper-container class="mySwiper" effect="cards" grab-cursor="true">
       <ng-container *ngFor="let card of listaCuentas?.result">
-        <swiper-slide>
+        <swiper-slide class="">
 
           <div class="fondo-gradiente w-full h-auto rounded-2xl px-6 py-3 text-white shadow-lg flex flex-col justify-between">
 
@@ -51,7 +51,8 @@
   <div class="w-full p-2 bg-white flex justify-between items-center rounded-2xl">
     <span class="ms-3 text-sm font-medium">Activar Tarjeta Digital</span>
     <label class="inline-flex items-center cursor-pointer">
-      <input type="checkbox" value="" class="sr-only peer" checked>
+      <input [disabled]="true" [defaultChecked]="false"
+             type="checkbox" value="false" class="sr-only peer" checked>
       <div class="relative w-11 h-6 bg-gray-200 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r from-emerald-500 to-emerald-900"></div>
     </label>
 
@@ -62,14 +63,14 @@
   <div class="flex-col gap-6 w-full p-3 bg-white flex justify-center rounded-2xl ">
     <span class="text-left px-3 text-sm font-medium">Transacciones</span>
     <ng-container *ngIf="transaccion" >
-      <div
+      <div (click)="modalMovimiento(transaccion)"
         class="w-full bg-white flex p-3 justify-between shadow-inner rounded-2xl">
         <div class="flex flex-col gap-4">
           <span class="font-medium text-xs">{{transaccion.description}}</span>
           <span class="datos-secundarios">{{transaccion.type === 'transfer' ? 'Transferencia' : 'Cargo'}}</span>
         </div>
         <div class="flex flex-col items-center gap-4">
-          <span class="font-medium">{{transaccion.amount}}</span>
+          <span class="{{transaccion.type === 'transfer' ? 'text-red-400': 'text-green-500'}} font-medium">{{transaccion.amount | currency: 'USD':'symbol'}}</span>
           <span class="datos-secundarios">{{transaccion.date | date:'short'}}</span>
         </div>
       </div>

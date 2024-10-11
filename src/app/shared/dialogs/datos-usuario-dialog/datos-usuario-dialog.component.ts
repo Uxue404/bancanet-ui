@@ -14,12 +14,12 @@ import {MatButtonModule} from "@angular/material/button";
 export class DatosUsuarioDialogComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:{
-      nomUsuario: string,
-      fechaNacimiento: string,
-      correo: string,
-      telefono: string
-    }
+    // @Inject(MAT_DIALOG_DATA) public data:{
+    //   nomUsuario: string,
+    //   fechaNacimiento: string,
+    //   correo: string,
+    //   telefono: string
+    // }
   ) { }
 
   ngOnInit(): void {

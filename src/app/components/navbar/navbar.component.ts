@@ -12,6 +12,9 @@ import {
 import {
   FormularioTransferenciaDialogComponent
 } from "../../shared/dialogs/tranferencias/formulario-transferencia-dialog/formulario-transferencia-dialog.component";
+import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../../core/services/auth.service";
+import {ObtenerUsuarioIdService} from "../../core/services/obtener-usuario-id.service";
 
 @Component({
   selector: 'app-navbar',
@@ -21,9 +24,11 @@ import {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
+  id: string | null = ''
+  dataUser: any
   constructor(
    private matDialog: MatDialog,
+   private userService: ObtenerUsuarioIdService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +52,7 @@ export class NavbarComponent implements OnInit {
   }
 
   mostrarDatosBancarios(){
+
     this.matDialog.open(DatosBancariosDialogComponent, {
       width: '90%',
       data: {
@@ -59,14 +65,9 @@ export class NavbarComponent implements OnInit {
   }
 
   mostrarDatosUsuario(){
+
     this.matDialog.open(DatosUsuarioDialogComponent, {
       width: '90%',
-      data: {
-        nomUsuario: `${this.usuario.nombre} ${this.usuario.apellido}`,
-        fechaNacimiento: this.usuario.fechaNacimiento,
-        correo: this.usuario.nomUser,
-        telefono: this.usuario.telefono
-      }
     })
   }
 

@@ -2,6 +2,7 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NavbarComponent} from "../../../../../components/navbar/navbar.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+
 import {
   DatosMovimientoDialogComponent
 } from "../../../../../shared/dialogs/datos-movimiento-dialog/datos-movimiento-dialog.component";
@@ -32,11 +33,13 @@ export class HomeComponent implements OnInit {
   transaccion: any = null;
   nombreUsuario: string | null = '';
   listaCuentas: any
+  isDigitalCardActive:boolean = false
   constructor(
     private matDialog: MatDialog,
     private authService: AuthService,
     private obtenerTransacciones: ObtenerTransaccionesUsuarioService,
-    private obtenerCuentasService: ObtenerCuentasUsuarioService
+    private obtenerCuentasService: ObtenerCuentasUsuarioService,
+    private obtenerUsuarioId: ObtenerUsuarioIdService
   ) { }
 
   ngOnInit(): void {
@@ -49,14 +52,26 @@ export class HomeComponent implements OnInit {
   logout(){
     this.authService.logout();
   }
-  modalMovimiento(id:number){
-    console.log(id);
-
+  modalMovimiento(data: any){
+    // console.log(id);
     this.matDialog.open(DatosMovimientoDialogComponent, {
       width: '90%',
-      // data: dialogData
+      data: data
     })
 
+  }
+
+  obtenerUsuario(){
+    this.id = this.authService.getId()
+    console.warn(this.id)
+    this.obtenerUsuarioId.obtenerUsuarioId(this.id!).subscribe(
+      (data: any)=>{
+        console.warn(data);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
 
 
@@ -65,7 +80,7 @@ export class HomeComponent implements OnInit {
     this.obtenerTransacciones.obtenerTransaccionesUsuario(this.id!).subscribe(
       (data)=>{
         this.transaccion = data
-        console.log(this.transaccion)
+        // console.log(this.transaccion)
       },
       (erro) =>{
         console.log(erro)
@@ -78,7 +93,7 @@ export class HomeComponent implements OnInit {
     this.obtenerCuentasService.obtenerCuentasUsuarioId(this.id!).subscribe(
       (data) =>{
         this.listaCuentas = data
-        console.warn(data)
+        // console.warn(data)
       },
       (error) =>{
         console.error('Error' + error)
