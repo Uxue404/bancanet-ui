@@ -4,20 +4,38 @@
   </div>
 
   <mat-dialog-content>
-    <div class="flex flex-col gap-2 text-xs">
-      <div>
-        <p class="font-medium text-sm">Número de Cuenta</p>
-        <span class="font-medium text-xs text-emerald-500">{{data.numCuenta}}</span>
+<!--    <div class="flex flex-col gap-2 text-xs">-->
+<!--      <div>-->
+<!--        <p class="font-medium text-sm">Número de Cuenta</p>-->
+<!--        <span class="font-medium text-xs text-emerald-500">{{data.numCuenta}}</span>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <p class="font-medium text-sm">Número de Tarjeta Digital</p>-->
+<!--        <span class="font-medium text-xs text-emerald-500">{{data.numTarjeta}}</span>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <p class="font-medium text-sm">Cuenta CLABE</p>-->
+<!--        <span class="font-medium text-xs text-emerald-500">{{data.numCLABE}}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+    <ng-container *ngFor="let cuentas of listaCuentas?.result; let i = index">
+      <div class="collapse pt-2">
+        <input type="checkbox" name="my-accordion-2"  />
+        <div class="collapse-title text-sm font-semibold drop-shadow-lg">Información Cuenta {{i + 1}}</div>
+        <div class="collapse-content text-xs flex justify-between">
+          <div class="flex flex-col gap-2">
+            <span class="flex flex-col font-semibold gap-1">Numero de cuenta: <span class="font-medium">{{cuentas.accountNumber}}</span> </span>
+            <span class="flex flex-col font-semibold gap-1">Tipo: <span class="font-medium"> {{cuentas.accountType === 'debit' ? 'Débito' : 'Crédito' }} </span></span>
+          </div>
+          <div class="flex items-center justify-center">
+            <span>{{ cuentas.balance}}</span>
+
+          </div>
+        </div>
       </div>
-      <div>
-        <p class="font-medium text-sm">Número de Tarjeta Digital</p>
-        <span class="font-medium text-xs text-emerald-500">{{data.numTarjeta}}</span>
-      </div>
-      <div>
-        <p class="font-medium text-sm">Cuenta CLABE</p>
-        <span class="font-medium text-xs text-emerald-500">{{data.numCLABE}}</span>
-      </div>
-    </div>
+    </ng-container>
+
+
   </mat-dialog-content>
   <mat-dialog-actions class="flex justify-center">
     <button mat-flat-button [mat-dialog-close]="false" class="w-[100%] font-medium btn btn-sm">

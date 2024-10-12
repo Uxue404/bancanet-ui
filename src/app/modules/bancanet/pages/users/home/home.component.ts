@@ -33,7 +33,9 @@ export class HomeComponent implements OnInit {
   transaccion: any[] = [];
   nombreUsuario: string | null = '';
   listaCuentas: any
-  isDigitalCardActive:boolean = false
+  isCliente: boolean = false;
+  hasCuentas: boolean = false;
+  hasMovimientos: boolean = false;
   constructor(
     private matDialog: MatDialog,
     private authService: AuthService,
@@ -68,7 +70,8 @@ export class HomeComponent implements OnInit {
     this.obtenerTransacciones.obtenerTransaccionesUsuario(this.id!).subscribe(
       (data:any)=>{
         this.transaccion = data.result;
-        console.log(this.transaccion)
+        // console.log(this.transaccion)
+        this.hasMovimientos = this.transaccion.length > 0;
       },
       (erro) =>{
         console.log(erro)
@@ -81,7 +84,9 @@ export class HomeComponent implements OnInit {
     this.obtenerCuentasService.obtenerCuentasUsuarioId(this.id!).subscribe(
       (data) =>{
         this.listaCuentas = data
-        // console.warn(data)
+        console.warn(data)
+        this.isCliente = true;
+        this.hasCuentas = this.listaCuentas.result && this.listaCuentas.result.length > 0;
       },
       (error) =>{
         console.error('Error' + error)
