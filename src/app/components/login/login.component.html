@@ -3,6 +3,11 @@
     <div class="text-3xl text-pretty text-center font-light">
       <p>Ingresar a  <span class="font-bold block">Banca en Línea</span></p>
     </div>
+
+    <!-- Alerta de error -->
+    <div *ngIf="showAlertError" role="alert" class="alert alert-error text-white p-2">
+      <span class="text-pretty p-2">Error! al iniciar sesión, verifique que su correo y/o contraseñas sean correctas</span>
+    </div>
     <div class="flex flex-col gap-6">
       <form [formGroup]="form" (ngSubmit)="login()" class="flex flex-col gap-6">
         <div class="flex flex-col gap-1">

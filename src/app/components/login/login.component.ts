@@ -15,6 +15,8 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  showAlertError: boolean = false;
   isLoading = false;
   form = new FormGroup<formType>({
     userName: new FormControl<string>('', {
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
         error: (e)=> {
           this.loaderService.stop()
           this.isLoading = false
+          this.showAlertError = true
           console.error("Login failed" + e)
         }
       })
