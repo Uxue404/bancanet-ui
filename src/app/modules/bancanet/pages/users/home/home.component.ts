@@ -30,6 +30,7 @@ register();
 })
 export class HomeComponent implements OnInit {
   id: string | null = ''
+  idCuentas: any
   transaccion: any[] = [];
   nombreUsuario: string | null = '';
   listaCuentas: any
@@ -84,7 +85,6 @@ export class HomeComponent implements OnInit {
     this.obtenerCuentasService.obtenerCuentasUsuarioId(this.id!).subscribe(
       (data) =>{
         this.listaCuentas = data
-        console.warn(data)
         this.isCliente = true;
         this.hasCuentas = this.listaCuentas.result && this.listaCuentas.result.length > 0;
       },
@@ -92,8 +92,19 @@ export class HomeComponent implements OnInit {
         console.error('Error' + error)
       }
     )
-
   }
 
 
+}
+
+interface Cuenta {
+  accountHolder: string;
+  accountNumber: string;
+  accountType: string;
+  balance: number;
+  id: string;
+  user: {
+    email: string;
+    id: string;
+  };
 }

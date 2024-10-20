@@ -8,45 +8,73 @@
     <span class="font-medium text-xs text-subText">Conctacte a Soporte para activar su tarjeta</span>
   </mat-dialog-content>
 
+  <!--  Alertas -->
+  <!-- Alerta de éxito -->
+  <div *ngIf="showAlertSuccess" role="alert" class="alert alert-success text-white p-2">
+    <span>Cuenta creada con Exito</span>
+  </div>
+
+  <!-- Alerta de error -->
+  <div *ngIf="showAlertError" role="alert" class="alert alert-error text-white p-2">
+    <span>Error! al crear cuenta</span>
+  </div>
+
+  <!-- Alerta de advertencia (formulario inválido) -->
+  <div *ngIf="showAlertWarning" role="alert" class="alert alert-warning text-white p-2" >
+    <span>Error Desconocido Llame a Soporte</span>
+  </div>
+
   <mat-dialog-content *ngIf="transferActive" >
-    <div class="flex flex-col gap-4 text-xs my-4">
+    <form [formGroup]="form">
+      <div class="flex flex-col gap-6 text-xs my-4">
 
-      <label class="input input-bordered flex items-center gap-4">
-        <mat-icon class="opacity-50 pr-6" >
-          account_balance
-        </mat-icon>
-        <input type="text" class="grow" placeholder="Banco" />
-      </label>
+        <!--      <label class="input input-bordered flex items-center gap-4">-->
+        <!--        <mat-icon class="opacity-50 pr-6" >-->
+        <!--          account_balance-->
+        <!--        </mat-icon>-->
+        <!--        <input type="text" class="grow" placeholder="Banco" />-->
+        <!--      </label>-->
 
-      <label class="input input-bordered flex items-center gap-4">
-        <mat-icon class="opacity-50 pr-6">
-          credit_card
-        </mat-icon>
-        <input type="text" class="grow truncate" placeholder="Tarjeta / CLABE" />
-      </label>
+<!--        <label class="input input-bordered flex items-center gap-4">-->
+<!--          <mat-icon class="opacity-50 pr-6">-->
+<!--            credit_card-->
+<!--          </mat-icon>-->
+<!--          <input formControlName="account" type="text" class="grow truncate" placeholder="Tarjeta / CLABE" />-->
+<!--        </label>-->
 
-
-      <label class="input input-bordered flex items-center gap-4">
-        <mat-icon class="opacity-50 pr-6">
-          attach_money
-        </mat-icon>
-        <input type="text" class="grow" placeholder="Monto" />
-      </label>
-      <label class="input input-bordered flex items-center gap-4">
-        <mat-icon class="opacity-50 pr-6">
-          person
-        </mat-icon>
-        <input type="text" class="grow" placeholder="Beneficiario" />
-      </label>
-      <label class="input input-bordered flex items-center gap-4">
-        <mat-icon class="opacity-50 pr-6">
-          edit
-        </mat-icon>
-        <input type="text" class="grow" placeholder="Concepto" />
-      </label>
-    </div>
+        <label class="form-control w-full max-w-xs gap-0">
+          <select class="select select-bordered" (change)="onCuentaSeleccionada($event)">
+            <option disabled selected>Selecciona una cuenta</option>
+            <ng-container *ngFor="let c of listaCuentas">
+              <option [value]="c.id" >{{c.id}}</option>
+            </ng-container>
+          </select>
+          <div class="label p-0.5" *ngIf="cuentaSelecccionada">
+            <span class="label-text-alt text-xs font-light">{{cuentaSelecccionada.balance | currency}}</span>
+          </div>
+        </label>
 
 
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50 pr-6">
+            attach_money
+          </mat-icon>
+          <input formControlName="amount" type="number" class="grow" placeholder="Monto" />
+        </label>
+        <!--      <label class="input input-bordered flex items-center gap-4">-->
+        <!--        <mat-icon class="opacity-50 pr-6">-->
+        <!--          person-->
+        <!--        </mat-icon>-->
+        <!--        <input type="text" class="grow" placeholder="Beneficiario" />-->
+        <!--      </label>-->
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50 pr-6">
+            edit
+          </mat-icon>
+          <input formControlName="description" type="text" class="grow" placeholder="Concepto" />
+        </label>
+      </div>
+    </form>
   </mat-dialog-content>
 
   <div *ngIf="transferActive" class="flex flex-col gap-1">

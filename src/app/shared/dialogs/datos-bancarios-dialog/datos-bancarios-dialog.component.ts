@@ -37,7 +37,7 @@ export class DatosBancariosDialogComponent implements OnInit {
       (data) => {
         // console.warn("Respuesta directa del servicio:", data)
         this.listaCuentas = data
-        console.warn("Valor asignado a listaCuentas:", this.listaCuentas)
+        // console.warn("Valor asignado a listaCuentas:", this.listaCuentas)
       },
       (error) => {
         console.error('Error al obtener cuentas:', error)
