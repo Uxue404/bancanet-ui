@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
     this.obtenerCuentasService.obtenerCuentasUsuarioId(this.id!).subscribe(
       (data) =>{
         this.listaCuentas = data
-        console.warn(data)
+        // console.warn(this.listaCuentas.result.forEach((a:any) => a.id))
         this.isCliente = true;
         this.hasCuentas = this.listaCuentas.result && this.listaCuentas.result.length > 0;
       },
@@ -96,4 +96,16 @@ export class HomeComponent implements OnInit {
   }
 
 
+}
+
+interface Cuenta {
+  accountHolder: string;
+  accountNumber: string;
+  accountType: string;
+  balance: number;
+  id: string;
+  user: {
+    email: string;
+    id: string;
+  };
 }
