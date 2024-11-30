@@ -1,27 +1,24 @@
 <div class="flex flex-col gap-4 justify-center text-xs">
   <div mat-dialog-title class="text-lg font-semibold text-texto">
-    {{transferActive ? 'Tranferencias a Otros bancos':'No se puede realizar transferencias'}}
+    {{transferActive ? 'Tranferencias a Otros bancos':'Comprobante de Transferencia'}}
 
   </div>
 
-  <mat-dialog-content *ngIf="!transferActive">
-    <span class="font-medium text-xs text-subText">Conctacte a Soporte para activar su tarjeta</span>
-  </mat-dialog-content>
 
   <!--  Alertas -->
   <!-- Alerta de éxito -->
   <div *ngIf="showAlertSuccess" role="alert" class="alert alert-success text-white p-2">
-    <span>Cuenta creada con Exito</span>
+    <span>Transferencia exitosa</span>
   </div>
 
   <!-- Alerta de error -->
   <div *ngIf="showAlertError" role="alert" class="alert alert-error text-white p-2">
-    <span>Error! al crear cuenta</span>
+    <span>{{errorPeticion}}</span>
   </div>
 
   <!-- Alerta de advertencia (formulario inválido) -->
   <div *ngIf="showAlertWarning" role="alert" class="alert alert-warning text-white p-2" >
-    <span>Error Desconocido Llame a Soporte</span>
+    <span>{{errorPeticion}}</span>
   </div>
 
   <mat-dialog-content *ngIf="transferActive" >
@@ -31,15 +28,15 @@
 
 
         <label class="form-control w-full max-w-xs gap-0">
-          <select class="select select-bordered" (change)="onCuentaSeleccionada($event)">
-            <option disabled selected>Selecciona una cuenta</option>
+          <select class="select select-bordered" formControlName="account" (change)="onCuentaSeleccionada($event)">
+            <option disabled selected class="text-subText">Selecciona una cuenta</option>
             <ng-container *ngFor="let c of listaCuentas">
-              <option [value]="c.id" >{{c.id}}</option>
+              <option class="text-subText"  [value]="c.id" >{{c.accountNumber}}</option>
             </ng-container>
           </select>
-          <div class="label p-0.5" *ngIf="cuentaSelecccionada">
-            <span class="label-text-alt text-xs font-light">{{cuentaSelecccionada.balance | currency}}</span>
-          </div>
+          <!--          <div class="label p-0.5" *ngIf="cuentaSelecccionada">-->
+          <!--            <span class="label-text-alt text-xs font-light">{{cuentaSelecccionada.balance | currency}}</span>-->
+          <!--          </div>-->
         </label>
 
 
@@ -49,12 +46,29 @@
           </mat-icon>
           <input formControlName="amount" type="number" class="grow" placeholder="Monto" />
         </label>
-        <!--      <label class="input input-bordered flex items-center gap-4">-->
-        <!--        <mat-icon class="opacity-50 pr-6">-->
-        <!--          person-->
-        <!--        </mat-icon>-->
-        <!--        <input type="text" class="grow" placeholder="Beneficiario" />-->
-        <!--      </label>-->
+        <div>
+          <label class="input input-bordered flex items-center gap-4">
+            <mat-icon class="opacity-50 pr-6">
+              account_balance
+            </mat-icon>
+            <input formControlName="destAccountNumber" [formControl]="ctrlNumberLength" type="number" class="grow" placeholder="Cuenta / CLABE" />
+          </label>
+          <div class="text-xs text-warning mt-1 ml-4 mb-0" *ngIf="ctrlNumberLength.touched && ctrlNumberLength.invalid">
+            <div *ngIf="ctrlNumberLength.hasError('required')">
+              Valor Requerido
+            </div>
+            <!-- Error de longitud (12 o 18 dígitos) -->
+            <div *ngIf="ctrlNumberLength.hasError('accountLength')">
+              Ingrese un numero de 11 o 18 digitos
+            </div>
+          </div>
+        </div>
+        <label class="input input-bordered flex items-center gap-4">
+          <mat-icon class="opacity-50 pr-6">
+            person
+          </mat-icon>
+          <input formControlName="destAccountHolderName" type="text" class="grow" placeholder="Beneficiario" />
+        </label>
         <label class="input input-bordered flex items-center gap-4">
           <mat-icon class="opacity-50 pr-6">
             edit
@@ -77,6 +91,11 @@
       </button>
     </mat-dialog-actions>
   </div>
+
+  <mat-dialog-content *ngIf="!transferActive">
+    <span class="font-medium text-xs text-subText">Comprobante abierto en otra ventana</span>
+  </mat-dialog-content>
+
 
   <mat-dialog-actions *ngIf="!transferActive">
     <button mat-flat-button [matDialogClose]="false" class="btn-sm w-[100%] font-medium" color="accent">

@@ -37,6 +37,8 @@ export class NavbarComponent implements OnInit {
   mostrarTransferencia(){
     this.matDialog.open(FormularioTransferenciaDialogComponent, {
       width: '90%'
+    }).afterClosed().subscribe(r => {
+      location.reload()
     })
   }
 
@@ -64,12 +66,7 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  mostrarDatosUsuario(){
 
-    this.matDialog.open(DatosUsuarioDialogComponent, {
-      width: '90%',
-    })
-  }
 
   usuario: usuarioBancoInfo={
     idUser: 1,
