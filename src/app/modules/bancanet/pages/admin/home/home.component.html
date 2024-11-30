@@ -80,6 +80,10 @@
               <mat-icon>delete</mat-icon>
               <span>Eliminar</span>
             </button>
+            <button mat-menu-item (click)="editarCuentaUsuario(user.id)">
+              <mat-icon>account_balance</mat-icon>
+              <span>Editar Cuenta</span>
+            </button>
           </mat-menu>
         </td>
       </ng-container>

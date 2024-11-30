@@ -20,6 +20,9 @@ import {
 import {
   ConfirmarEliminarUsuarioDialogComponent
 } from "../../../../../shared/dialogs/confirmar-eliminar-usuario-dialog/confirmar-eliminar-usuario-dialog.component";
+import {
+  EditarCuentaUsuarioComponent
+} from "../../../../../shared/dialogs/editar-cuenta-usuario/editar-cuenta-usuario.component";
 
 @Component({
   selector: 'app-home',
@@ -115,6 +118,15 @@ export class HomeComponent implements OnInit {
       width: '90%',
       data:{
         id: idUser,
+      }
+    })
+  }
+
+  editarCuentaUsuario(idUser: string){
+    this.matDialog.open(EditarCuentaUsuarioComponent, {
+      width: '90%',
+      data: {
+        id: idUser
       }
     })
   }

@@ -94,11 +94,11 @@
 
 
   <mat-dialog-actions *ngIf="!transferActive && pdfUrl">
+    <button (click)="abrirPDF()" mat-flat-button color="primary" >Abrir comprobante de transferencia</button>
+  </mat-dialog-actions>
+  <mat-dialog-actions *ngIf="!transferActive && pdfUrl">
     <button mat-flat-button [matDialogClose]="false" class="btn-sm w-[100%] font-medium" color="accent">
       Cerrar
     </button>
-  </mat-dialog-actions>
-  <mat-dialog-actions *ngIf="!transferActive && pdfUrl">
-    <button (click)="abrirPDF()" mat-flat-button color="primary" >Abrir comprobante de transferencia</button>
   </mat-dialog-actions>
 </div>

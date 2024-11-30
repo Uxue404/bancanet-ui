@@ -1,0 +1,58 @@
+<div class="gap-4">
+  <p mat-dialog-title class="text-lg font-semibold text-texto text-center">
+    Editar Usuario
+  </p>
+  <!-- Alerta de éxito -->
+  <div *ngIf="showAlertSuccess" role="alert" class="alert alert-success text-white p-2 ">
+    <span>Usuario Editado con Exito</span>
+  </div>
+
+  <!-- Alerta de error -->
+  <div *ngIf="showAlertError" role="alert" class="alert alert-error text-white p-2">
+    <span>Error! al editar Usuario</span>
+  </div>
+
+  <!-- Alerta de advertencia (formulario inválido) -->
+  <div *ngIf="showAlertWarning" role="alert" class="alert alert-warning text-white p-2">
+    <span>No hay cambios para actualizar</span>
+  </div>
+
+
+  <mat-dialog-content>
+    <form [formGroup]="form" class="">
+
+      <label class="form-control w-full max-w-xs gap-0">
+        <select class="select select-bordered" formControlName="account" (change)="onCuentaSeleccionada($event)">
+          <option disabled selected class="text-subText" value="Seleccione una cuenta">Seleccione una cuenta</option>
+          <ng-container *ngFor="let c of listaCuentas">
+            <option class="text-subText"  [value]="c.id" >{{c.accountNumber}}</option>
+          </ng-container>
+        </select>
+      </label>
+
+      <div *ngIf="cuentaSelecccionada" class="flex flex-col gap-4 text-xs my-4">
+        <label class="input input-bordered flex items-center gap-2">
+          <input formControlName="accountHolder"
+                 type="text" class="grow" placeholder="Nombre Usuario"  >
+        </label>
+
+        <label class="input input-bordered flex items-center gap-2">
+          <input formControlName="accountType"
+                 type="text" class="grow" placeholder="Nombre Usuario">
+        </label>
+
+        <label class="input input-bordered flex items-center gap-2">
+          <input formControlName="balance"
+                 type="number" class="grow">
+        </label>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="editarCuenta()" class="w-full text-white font-medium btn btn-sm fondo-gradiente">
+      Editar Cuenta
+    </button>
+  </mat-dialog-actions>
+
+</div>

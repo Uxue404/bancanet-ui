@@ -88,6 +88,7 @@ export class EditarUsuarioDialogComponent implements OnInit {
           }
         });
       } else {
+        this.loaderService.stop()
         console.log('No hay cambios para actualizar');
         this.showAlertWarning = true
       }
