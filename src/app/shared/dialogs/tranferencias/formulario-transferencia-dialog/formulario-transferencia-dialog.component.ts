@@ -49,7 +49,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
     };
   }
   form = new FormGroup<formType>({
-    account: new FormControl('', {
+    account: new FormControl('Seleecione una cuenta', {
       nonNullable: true,
       validators: [Validators.required],
     }),

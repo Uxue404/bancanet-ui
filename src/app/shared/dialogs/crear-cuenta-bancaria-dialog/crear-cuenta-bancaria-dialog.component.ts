@@ -24,7 +24,7 @@ export class CrearCuentaBancariaDialogComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    accountType: new FormControl('', {
+    accountType: new FormControl('Tipo de Cuenta', {
       nonNullable: true,
       validators: [Validators.required]
     })
