@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {TokenDialogComponent} from "../token-dialog/token-dialog.component";
 import {TransferenciaService} from "../../../../core/services/transferencia.service";
 import {
   AbstractControl,
@@ -16,7 +15,7 @@ import {
 } from "@angular/forms";
 import {AuthService} from "../../../../core/services/auth.service";
 import {ObtenerCuentasUsuarioService} from "../../../../core/services/obtener-cuentas-usuario.service";
-import * as dgram from "node:dgram";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-formulario-transferencia-dialog',
@@ -26,6 +25,7 @@ import * as dgram from "node:dgram";
   styleUrls: ['./formulario-transferencia-dialog.component.scss']
 })
 export class FormularioTransferenciaDialogComponent implements OnInit {
+  pdfUrl: string | null = null;
   id: string | null = ''
   idCuentas: any
   errorPeticion : string | unknown = ''
@@ -77,7 +77,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
   constructor(
     private matDialog: MatDialog,
     private transfer: TransferenciaService,
-
+    private loaderService: NgxUiLoaderService,
     private authService: AuthService,
     private obtenerCuentasService: ObtenerCuentasUsuarioService,
 
@@ -85,6 +85,9 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCuentas()
+    this.showAlertSuccess= false;
+    this.showAlertError = false;
+    this.showAlertWarning = false;
   }
 
   get ctrlNumberLength(){
@@ -98,7 +101,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
       this.errorPeticion = 'Error en el formulario';
       return;
     }
-
+    this.loaderService.start()
     this.id = this.authService.getId();
     const tokenData = {
       userId: this.id
@@ -106,6 +109,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
 
     this.transfer.generarTokenTrans(tokenData).subscribe({
       next: (tokenTrans) => {
+
         const formData = {
           ...this.form.value,
           user: this.id,
@@ -119,11 +123,26 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
             this.resetFormValues();
 
             if (response.pdfBase64) {
-              this.transfer.abrirPDFBase64(response.pdfBase64);
+              this.loaderService.stop()
               this.transferActive = false
+
+              // this.transfer.abrirPDFBase64(response.pdfBase64);
+              // Generar el enlace temporal para el PDF
+              const pdfData = response.pdfBase64.replace('data:application/pdf;base64,', '');
+              const byteCharacters = atob(pdfData);
+              const byteNumbers = new Array(byteCharacters.length);
+              for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+              }
+              const byteArray = new Uint8Array(byteNumbers);
+              const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+              this.pdfUrl = window.URL.createObjectURL(blob); // Guarda la URL temporal
+
             }
           },
           error: (error) => {
+            this.loaderService.stop()
             this.showAlertError = true;
             this.errorPeticion = error.error?.message || 'Error al realizar la transferencia';
             console.error('Error:', error);
@@ -131,6 +150,7 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
         });
       },
       error: (error) => {
+        this.loaderService.stop()
         this.showAlertError = true;
         this.errorPeticion = 'Error al generar el token';
         console.error('Error:', error);
@@ -139,6 +159,17 @@ export class FormularioTransferenciaDialogComponent implements OnInit {
   }
   resetFormValues() {
     this.form.reset()
+  }
+  abrirPDF() {
+    if (this.pdfUrl) {
+      window.open(this.pdfUrl, '_blank');
+
+      // Opcional: Limpiar la URL después de un tiempo para liberar memoria
+      setTimeout(() => {
+        window.URL.revokeObjectURL(this.pdfUrl!);
+        this.pdfUrl = null; // Resetear la variable
+      }, 10000); // Cambia el tiempo según sea necesario
+    }
   }
 
   obtenerCuentas(){
